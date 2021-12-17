@@ -1,0 +1,17 @@
+{
+  "name": "sludges-app",
+  "version": "0.1.0",
+  "description": "A desktop application that visualizes the sludges found in a tank, and calculate the volume of the sludge. The user will input certain parameters and values, and the application will generate certain diagrams and give the volume of the sludge.",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "Mohammad Agha",
+    "email": "mohammad.agha.dev@gmail.com",
+    "url": "https://github.com/Manal-Jaber/Sludges-App"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ts-node/register ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ts-node/register ../../.erb/scripts/link-modules.ts",
+    "postinstall": "npm run electron-rebuild && npm run link-modules"
+  },
+  "license": "MIT"
+}
