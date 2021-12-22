@@ -15,7 +15,6 @@ const FramelessNav: React.FC<FramelessNav> = () => {
 
   return (
     <div className="frameless-nav">
-      <div className="app-logo">logo</div>
       <div className="actions">
         <div className="action-icon" id="min-btn" onClick={minimizeWindow}>
           <svg
@@ -62,6 +61,7 @@ const FramelessNav: React.FC<FramelessNav> = () => {
           </svg>
         </div>
       </div>
+      {/* <div className="app-logo">logo</div> */}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { MemoryRouter as Router, Switch, Route } from 'react-router-dom';
 import FramelessNav from './components/FramelessNav';
 import Home from './components/Home';
+import './App.scss';
 
 export default function App() {
   return (

@@ -3,22 +3,17 @@
   -webkit-user-select: none;
   -webkit-app-region: drag;
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-between;
   align-items: center;
-  background: #4f73a8;
   .app-logo {
     color: white;
   }
   .actions {
     display: flex;
     .action-icon {
-      color: white;
       padding: 0 0.5rem;
       -webkit-app-region: no-drag;
-      &:hover {
-        color: black;
-        background: #f4f4f4;
-      }
     }
   }
 }

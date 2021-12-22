@@ -1,0 +1,21 @@
+.tabs {
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  .tab {
+    background-color: var(--light-brown-primary);
+    color: var(--dark-brown-primary);
+    padding: 1.5rem 0.5rem;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    &:not(:last-child) {
+      border-right: 1px solid var(--dark-brown-primary);
+    }
+    &.selected {
+      background-color: var(--dark-brown-primary);
+      color: var(--light-brown-primary);
+      border-right: none;
+    }
+  }
+}
