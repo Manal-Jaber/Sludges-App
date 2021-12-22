@@ -12,8 +12,13 @@
   .actions {
     display: flex;
     .action-icon {
-      padding: 0 0.5rem;
+      padding: 10px;
       -webkit-app-region: no-drag;
+      color: var(--dark-brown-primary);
+      &:hover {
+        background-color: var(--dark-brown-primary);
+        color: var(--light-brown-primary);
+      }
     }
   }
 }
