@@ -1,5 +1,6 @@
 import { table } from 'console';
 import React from 'react';
+import Button from '../Button';
 import './index.scss';
 import { Point } from './Types';
 
@@ -18,6 +19,9 @@ const point: Point = {
 const points: Point[] = [point, point, point, point, point];
 
 const Table: React.FC<Table> = () => {
+  // Listeners
+  const exportTable = () => {};
+
   return (
     <div className="table-container">
       <table className="table">
@@ -44,6 +48,11 @@ const Table: React.FC<Table> = () => {
           })}
         </tbody>
       </table>
+      <Button
+        text="Export table"
+        className="generate-pt-btn"
+        listener={exportTable}
+      />
     </div>
   );
 };

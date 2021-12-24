@@ -131,17 +131,5 @@
         }
       }
     }
-    .points-generation-btn {
-      background-color: var(--dark-brown-primary);
-      color: var(--light-brown-primary);
-      border: none;
-      border-radius: 5px;
-      padding: 0.25rem 0.5rem;
-      cursor: pointer;
-      &:hover {
-        background-color: var(--light-brown-primary);
-        color: var(--dark-brown-primary);
-      }
-    }
   }
 }

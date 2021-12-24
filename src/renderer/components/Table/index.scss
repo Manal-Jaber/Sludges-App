@@ -1,5 +1,8 @@
 .table-container {
   margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   .table {
     width: 100%;
     margin: auto;
@@ -40,5 +43,9 @@
         }
       }
     }
+  }
+  .generate-pt-btn {
+    width: fit-content;
+    margin-top: 1.5rem;
   }
 }

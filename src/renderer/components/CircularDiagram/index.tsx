@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Button from '../Button';
 import './index.scss';
 
 interface CircularDiagram {}
@@ -74,9 +75,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             <span className="state-two">radial</span>
           </div>
         </div>
-        <button className="points-generation-btn" onClick={generatePoints}>
-          Generate Points
-        </button>
+        <Button text="Generate Points" listener={generatePoints} />
       </div>
     </div>
   );
