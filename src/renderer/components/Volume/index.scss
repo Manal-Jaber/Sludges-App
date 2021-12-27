@@ -1,2 +1,58 @@
 .volume {
+  height: 100%;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .input-field {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    .input-label {
+      font-weight: bold;
+      color: var(--light-brown-primary);
+      width: 139px;
+      text-align: center;
+      margin-right: 1.5rem;
+    }
+    .input-value {
+      color: var(--dark-brown-primary);
+      background-color: var(--v-light-blue-secondary);
+      width: 112px;
+      height: 32px;
+      text-align: center;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .calc-action {
+    margin-top: 2rem;
+  }
+  .result-info {
+    margin-top: 60px;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--light-brown-primary);
+  }
+  .symbol {
+    margin-top: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--light-brown-primary);
+  }
+  .result {
+    margin-top: 1rem;
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--light-brown-primary);
+  }
+  .export-action {
+    position: absolute;
+    transform: translateX(-50%);
+    width: 96px;
+    left: 50%;
+    bottom: 1rem;
+  }
 }
