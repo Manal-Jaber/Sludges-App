@@ -32,6 +32,19 @@
         border-right: 1px solid var(--light-brown-primary);
       }
     }
+    .x-input,
+    .y-input,
+    .z-input,
+    .r-input {
+      background-color: var(--v-light-blue-secondary);
+      text-align: center;
+      width: 100%;
+      height: 22px;
+      border: none;
+      &:focus {
+        outline: none;
+      }
+    }
   }
   .points-generation {
     display: flex;
