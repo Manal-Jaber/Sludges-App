@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Plot from 'react-plotly.js';
 
 import './index.scss';
@@ -6,6 +6,16 @@ import './index.scss';
 interface SurfacePlot {}
 
 const SurfacePlot: React.FC<SurfacePlot> = () => {
+  // To remove the plottly library link
+  useEffect(() => {
+    const plotlyElement = document.getElementsByClassName(
+      'modebar-btn plotlyjsicon'
+    )[0];
+    if (plotlyElement) {
+      plotlyElement.remove();
+    }
+  }, []);
+
   return (
     <div className="surface-plot">
       <Plot
