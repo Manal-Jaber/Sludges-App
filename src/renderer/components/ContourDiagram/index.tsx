@@ -6,16 +6,6 @@ import './index.scss';
 interface ContourDiagram {}
 
 const ContourDiagram: React.FC<ContourDiagram> = () => {
-  // To remove the plottly library link
-  useEffect(() => {
-    const plotlyElement = document.getElementsByClassName(
-      'modebar-btn plotlyjsicon'
-    )[0];
-    if (plotlyElement) {
-      plotlyElement.remove();
-    }
-  }, []);
-
   return (
     <div className="contour-diagram">
       <Plot
