@@ -1,5 +1,8 @@
 .circular-diagram {
   margin-top: 1.5rem;
+  .circle-wrapper {
+    width: 100%;
+  }
   .circle {
     position: relative;
     width: 260px;
@@ -145,5 +148,11 @@
         }
       }
     }
+  }
+  .export-btn {
+    margin-top: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
   }
 }
