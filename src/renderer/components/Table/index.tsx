@@ -1,8 +1,8 @@
-import { table } from 'console';
 import React from 'react';
 import Button from '../Button';
-import './index.scss';
+import XLSX from 'xlsx';
 import { Point } from './Types';
+import './index.scss';
 
 interface Table {}
 
@@ -20,7 +20,29 @@ const points: Point[] = [point, point, point, point, point];
 
 const Table: React.FC<Table> = () => {
   // Listeners
-  const exportTable = () => {};
+  const exportTable = () => {
+    // here we should apply the data stored in the state holding the array of generated points
+    const worksheet = XLSX.utils.json_to_sheet([
+      {
+        id: 1,
+        name: 'Mohammad',
+        age: 22,
+      },
+      {
+        id: 2,
+        name: 'Manal',
+        age: 22,
+      },
+    ]);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'points');
+    // Buffer
+    XLSX.write(workbook, { bookType: 'xlsx', type: 'buffer' });
+    // Binary string
+    XLSX.write(workbook, { bookType: 'xlsx', type: 'binary' });
+    // Download
+    XLSX.writeFile(workbook, 'points_sheet.xlsx');
+  };
 
   return (
     <div className="table-container">
