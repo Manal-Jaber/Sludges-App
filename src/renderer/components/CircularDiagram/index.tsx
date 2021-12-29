@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Button from '../Button';
+import * as htmlToImage from 'html-to-image';
+import { toJpeg, toPng } from 'html-to-image';
 import './index.scss';
 
 interface CircularDiagram {}
@@ -135,28 +137,43 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
     setYPoint(Math.round(newY * 100) / 100);
   };
 
+  const exportDiagram = () => {
+    htmlToImage
+      .toPng(document.getElementById('circle-wrapper')!, {
+        quality: 0.95,
+      })
+      .then(function (dataUrl) {
+        var link = document.createElement('a');
+        link.download = 'circle.jpeg';
+        link.href = dataUrl;
+        link.click();
+      });
+  };
+
   const generatePoints = () => {};
   const numberChange = (e: any) => setNumberOfPoints(e.target.value);
   const changePointsOptions = () => setPointsOptions((prev) => !prev);
 
   return (
     <div className="circular-diagram">
-      <div
-        className="circle"
-        id="circle"
-        onMouseMove={changeCoordinates}
-        onClick={assignCoordinates}
-      >
-        <svg
-          className="center"
-          width="5"
-          height="5"
-          viewBox="0 0 5 5"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
+      <div className="circle-wrapper" id="circle-wrapper">
+        <div
+          className="circle"
+          id="circle"
+          onMouseMove={changeCoordinates}
+          onClick={assignCoordinates}
         >
-          <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
-        </svg>
+          <svg
+            className="center"
+            width="5"
+            height="5"
+            viewBox="0 0 5 5"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
+          </svg>
+        </div>
       </div>
       <div className="data-table">
         <div className="data-def">
@@ -238,6 +255,9 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
           </div>
         </div>
         <Button text="Generate Points" listener={generatePoints} />
+      </div>
+      <div className="export-btn">
+        <Button text="Export Diagram" listener={exportDiagram} />
       </div>
     </div>
   );
