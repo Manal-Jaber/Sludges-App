@@ -20,6 +20,9 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
 
+  // Constants
+  const radius = 100;
+
   // Setting Values of Circle
   // const width = document
   // .querySelector('#circle')
@@ -45,31 +48,32 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
     const xBound = e.nativeEvent.offsetX;
     const yBound = e.nativeEvent.offsetY;
     // X and Y relative coordinates ranging in [-100, 100]
-    const xRelative = (xBound / width) * 200 - 100; // /width*200 to have 200 as width and -100 to have negative and positive values
-    const yRelative = 100 - (yBound / height) * 200;
+    const xRelative = (xBound / width) * 2 * radius - radius; // /width*200 to have 200 as width and -100 to have negative and positive values
+    const yRelative = radius - (yBound / height) * 2 * radius;
     // radius
-    const radius = Math.sqrt(xRelative ** 2 + yRelative ** 2);
+    const rRelative = Math.sqrt(xRelative ** 2 + yRelative ** 2);
     setXVal(Math.round(xRelative * 100) / 100);
     setYVal(Math.round(yRelative * 100) / 100);
-    setRVal(Math.round(radius * 100) / 100);
+    setRVal(Math.round(rRelative * 100) / 100);
   };
 
   // to assign coordinates on mouse click
   const assignCoordinates = (e: any) => {
+    console.log(e);
     // change to input
     setRenderInput(true);
     // X and Y coordinates relative to the boundary of the circle
     const xBound = e.nativeEvent.offsetX;
     const yBound = e.nativeEvent.offsetY;
     // X and Y relative coordinates ranging in [-100, 100]
-    const xRelative = (xBound / width) * 200 - 100; // /width*200 to have 200 as width and -100 to have negative and positive values
-    const yRelative = 100 - (yBound / height) * 200;
+    const xRelative = (xBound / width) * 2 * radius - radius; // /width*200 to have 200 as width and -100 to have negative and positive values
+    const yRelative = radius - (yBound / height) * 2 * radius;
     // radius
-    const radius = Math.sqrt(xRelative ** 2 + yRelative ** 2);
+    const rRelative = Math.sqrt(xRelative ** 2 + yRelative ** 2);
     // setting coordinates to the nearest hundredth
     setXPoint(Math.round(xRelative * 100) / 100);
     setYPoint(Math.round(yRelative * 100) / 100);
-    setRPoint(Math.round(radius * 100) / 100);
+    setRPoint(Math.round(rRelative * 100) / 100);
     // Drawing the point
     // const node = document.create
     //   <svg
