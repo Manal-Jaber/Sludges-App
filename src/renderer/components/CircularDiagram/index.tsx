@@ -102,9 +102,9 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
     newElement.setAttribute('cy', '2.5');
     newElement.setAttribute('r', '2.5');
     svgElement.appendChild(newElement);
-    svgElement.setAttribute('position', 'absolute');
-    svgElement.setAttribute('left', `${xPoint}`);
-    svgElement.setAttribute('top', `${yPoint}`);
+    // svgElement.setAttribute('position', 'absolute');
+    svgElement.setAttribute('x', xBound);
+    svgElement.setAttribute('y', yBound);
     svgElement.setAttribute('height', '5');
     svgElement.setAttribute('width', '5');
     document.querySelector('#circle')?.appendChild(svgElement);
@@ -157,7 +157,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   return (
     <div className="circular-diagram">
       <div className="circle-wrapper" id="circle-wrapper">
-        <div
+        <svg
           className="circle"
           id="circle"
           onMouseMove={changeCoordinates}
@@ -167,13 +167,15 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             className="center"
             width="5"
             height="5"
+            x="50%"
+            y="50%"
             viewBox="0 0 5 5"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
             <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
           </svg>
-        </div>
+        </svg>
       </div>
       <div className="data-table">
         <div className="data-def">
