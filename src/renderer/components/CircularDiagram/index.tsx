@@ -4,6 +4,9 @@ import * as htmlToImage from 'html-to-image';
 import { toJpeg, toPng } from 'html-to-image';
 import './index.scss';
 
+// importing functions
+import { generatePoints } from './functions/generatePoints';
+
 interface CircularDiagram {}
 
 const CircularDiagram: React.FC<CircularDiagram> = () => {
@@ -21,6 +24,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   const [numberOfPoints, setNumberOfPoints] = useState(5);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
+  const [generatedPoints, setGeneratedPoints] = useState([]);
 
   // Constants
   const radius = 100;
@@ -150,7 +154,6 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
       });
   };
 
-  const generatePoints = () => {};
   const numberChange = (e: any) => setNumberOfPoints(e.target.value);
   const changePointsOptions = () => setPointsOptions((prev) => !prev);
 
@@ -256,7 +259,13 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             <span className="state-two">radial</span>
           </div>
         </div>
-        <Button text="Generate Points" listener={generatePoints} />
+        {/* <Button text="Generate Points" listener={generatePoints} /> */}
+        <Button
+          text="Generate Points"
+          listener={() =>
+            generatePoints(xPoint, yPoint, rPoint, numberOfPoints, pointsOption)
+          }
+        />
       </div>
       <div className="export-btn">
         <Button text="Export Diagram" listener={exportDiagram} />
