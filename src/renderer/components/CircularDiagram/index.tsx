@@ -151,7 +151,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             <input
               type="number"
               className="number-value"
-              onChange={modifyNumber}
+              onChange={(e: any) => modifyNumber(e, setNumberOfPoints)}
               value={numberOfPoints}
               min={0}
             />
@@ -161,7 +161,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             <label className="switch">
               <input
                 type="checkbox"
-                onChange={modifyPointsOptions}
+                onChange={() => modifyPointsOptions(setPointsOptions)}
                 checked={pointsOption}
               />
               <span className="slider round"></span>
