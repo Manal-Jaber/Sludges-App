@@ -37,6 +37,5 @@ export const generatePoints = (
       pointsArray.push({ x: x, y: y });
     }
   }
-  console.log(pointsArray);
   return pointsArray;
 };
