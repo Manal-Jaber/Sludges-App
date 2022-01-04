@@ -31,7 +31,7 @@ export const modifyZValue = (
   e: any,
   setZPoint: React.Dispatch<React.SetStateAction<number>>
 ) => {
-  setZPoint(e.target.value);
+  setZPoint(Math.round(e.target.value * 100) / 100);
 };
 
 // Changing Radius Input
@@ -61,4 +61,14 @@ export const modifyPointsOptions = (
   setPointsOptions: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
   setPointsOptions((prev) => !prev);
+};
+
+// Changing Color
+export const modifyColor = (
+  e: any,
+  setColor: React.Dispatch<React.SetStateAction<string>>,
+  setAlpha: React.Dispatch<React.SetStateAction<number>>
+) => {
+  setColor(e.color);
+  setAlpha(e.alpha);
 };

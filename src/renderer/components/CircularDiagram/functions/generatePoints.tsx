@@ -13,6 +13,11 @@ const calculateX = (r: number, alpha: number) => {
 const calculateY = (r: number, alpha: number) => {
   return r * Math.sin(alpha);
 };
+
+const calculateR = (x: number, y: number) => {
+  return Math.sqrt(x ** 2 + y ** 2);
+};
+
 export const generatePoints = (
   namePoint: string,
   setNamePoint: React.Dispatch<React.SetStateAction<string>>,
@@ -22,8 +27,12 @@ export const generatePoints = (
   xPoint: number,
   yPoint: number,
   rPoint: number,
+  zPoint: number,
+  setZPoint: React.Dispatch<React.SetStateAction<number>>,
   numberOfPoints: number,
-  pointsOption: boolean
+  pointsOption: boolean,
+  color: string,
+  alpha: number
 ) => {
   setRenderInput(false);
   setMarker(true);
@@ -35,8 +44,10 @@ export const generatePoints = (
   } else if (numberOfPoints == 1) {
     const xBound = getBoundX(xPoint);
     const yBound = getBoundY(yPoint);
-    drawPoint(namePoint + '0', xBound, yBound, 'point');
-    return [{ name: namePoint + '0', x: xPoint, y: yPoint }];
+    drawPoint(namePoint + '0', xBound, yBound, 'point', color, alpha);
+    return [
+      { point: namePoint + '0', x: xPoint, y: yPoint, r: rPoint, z: zPoint },
+    ];
   } else {
     if (pointsOption) {
       // false -> linear, true -> radial
@@ -46,10 +57,16 @@ export const generatePoints = (
         const alpha = theta + i * separatingAngle;
         const x = calculateX(rPoint, alpha);
         const y = calculateY(rPoint, alpha);
-        pointsArray.push({ x: x, y: y });
+        pointsArray.push({
+          point: namePoint + i,
+          x: x,
+          y: y,
+          r: rPoint,
+          z: zPoint,
+        });
         const xBound = getBoundX(x);
         const yBound = getBoundY(y);
-        drawPoint(namePoint + i, xBound, yBound, 'point');
+        drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
       }
     } else {
       const xAround = Math.sqrt(radius ** 2 - yPoint ** 2);
@@ -58,15 +75,17 @@ export const generatePoints = (
       for (var i = 0; i < numberOfPoints; i++) {
         const x = -xAround + (i + 1) * separatingDistance;
         const y = yPoint;
-        pointsArray.push({ x: x, y: y });
+        const r = calculateR(x, y);
+        pointsArray.push({ point: namePoint + i, x: x, y: y, r: r, z: zPoint });
         const xBound = getBoundX(x);
         const yBound = getBoundY(y);
-        drawPoint(namePoint + i, xBound, yBound, 'point');
+        drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
       }
     }
     setGeneratedPoints((prev) => [...prev, pointsArray]);
     removePoint(namePoint);
     setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));
+    setZPoint(0);
 
     return pointsArray;
   }

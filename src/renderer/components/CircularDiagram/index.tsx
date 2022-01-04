@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Button from '../Button';
 import './index.scss';
 
+// importing for color picker
+import 'rc-color-picker/assets/index.css';
+import ReactDOM from 'react-dom';
+import ColorPicker from 'rc-color-picker';
+
 // importing functions
 import { generatePoints } from './functions/generatePoints';
 import { exportDiagram } from './functions/exportDiagram';
@@ -14,6 +19,7 @@ import {
   modifyRValue,
   modifyNumber,
   modifyPointsOptions,
+  modifyColor,
 } from './functions/modificationFunctions';
 
 interface CircularDiagram {}
@@ -40,6 +46,8 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   const [numberOfPoints, setNumberOfPoints] = useState(5);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
+  const [color, setColor] = useState('#A47A51');
+  const [alpha, setAlpha] = useState(100);
   const [generatedPoints, setGeneratedPoints] = useState([{}]);
   console.log(generatedPoints);
   return (
@@ -160,6 +168,14 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             </label>
             <span className="state-two">radial</span>
           </div>
+          <ColorPicker
+            color={color}
+            alpha={alpha}
+            onChange={(e: any) => modifyColor(e, setColor, setAlpha)}
+            // onClose={closeHandler}
+            placement="topLeft"
+            className="color-picker"
+          />
         </div>
         <Button
           text="Generate Points"
@@ -173,8 +189,12 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
               xPoint,
               yPoint,
               rPoint,
+              zPoint,
+              setZPoint,
               numberOfPoints,
-              pointsOption
+              pointsOption,
+              color,
+              alpha
             )
           }
         />

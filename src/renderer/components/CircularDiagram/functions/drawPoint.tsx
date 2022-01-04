@@ -2,7 +2,9 @@ export const drawPoint = (
   name: string,
   x: number,
   y: number,
-  indicator: string
+  indicator: string,
+  color?: string,
+  alpha?: number
 ) => {
   var svgElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
@@ -12,8 +14,12 @@ export const drawPoint = (
     'http://www.w3.org/2000/svg',
     'circle'
   );
-  newElement.setAttribute('fill', indicator === 'marker' ? 'none' : '#A47A51');
-  newElement.setAttribute('stroke', '#A47A51');
+  newElement.setAttribute(
+    'fill',
+    indicator === 'marker' ? 'none' : color || '#A47A51'
+  );
+  newElement.setAttribute('fillOpacity', `${alpha || 0}`);
+  newElement.setAttribute('stroke', color || '#A47A51');
   newElement.setAttribute('strokeWidth', '1');
   newElement.setAttribute('cx', '2.5');
   newElement.setAttribute('cy', '2.5');
