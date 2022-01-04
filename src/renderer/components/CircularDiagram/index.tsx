@@ -18,6 +18,13 @@ import {
 
 interface CircularDiagram {}
 
+// Constants
+export const radius = 100;
+export const width =
+  document.querySelector('#circle')?.getBoundingClientRect()?.width || 260;
+export const height =
+  document.querySelector('#circle')?.getBoundingClientRect()?.height || 260;
+
 const CircularDiagram: React.FC<CircularDiagram> = () => {
   // React states
   const [xVal, setXVal] = useState(0);
@@ -28,42 +35,26 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   const [yPoint, setYPoint] = useState(0);
   const [rPoint, setRPoint] = useState(0);
   const [zPoint, setZPoint] = useState(0);
+  const [namePoint, setNamePoint] = useState('A');
+  const [marker, setMarker] = useState(true);
   const [numberOfPoints, setNumberOfPoints] = useState(5);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
-  const [generatedPoints, setGeneratedPoints] = useState([]);
-
-  // Constants
-  const radius = 100;
-  const width =
-    document.querySelector('#circle')?.getBoundingClientRect()?.width || 0;
-  const height =
-    document.querySelector('#circle')?.getBoundingClientRect()?.height || 0;
-
+  const [generatedPoints, setGeneratedPoints] = useState([{}]);
+  console.log(generatedPoints);
   return (
     <div className="circular-diagram">
       <div className="circle-wrapper" id="circle-wrapper">
         <svg
-          className="circle"
+          className={`circle ${marker ? 'marker' : 'no-marker'}`}
           id="circle"
-          onMouseMove={(e) =>
-            hoverCoordinates(
-              e,
-              radius,
-              width,
-              height,
-              setXVal,
-              setYVal,
-              setRVal
-            )
-          }
+          onMouseMove={(e) => hoverCoordinates(e, setXVal, setYVal, setRVal)}
           onClick={(e: any) =>
             assignCoordinates(
               e,
-              radius,
-              width,
-              height,
+              namePoint,
               setRenderInput,
+              setMarker,
               setXPoint,
               setYPoint,
               setRPoint
@@ -85,6 +76,7 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
         </svg>
       </div>
       <div className="data-table">
+        <span className="data-def">{namePoint}</span>
         <div className="data-def">
           <span className="data-name">X: </span>
           {renderInput ? (
@@ -169,11 +161,21 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
             <span className="state-two">radial</span>
           </div>
         </div>
-        {/* <Button text="Generate Points" listener={generatePoints} /> */}
         <Button
           text="Generate Points"
           listener={() =>
-            generatePoints(xPoint, yPoint, rPoint, numberOfPoints, pointsOption)
+            generatePoints(
+              namePoint,
+              setNamePoint,
+              setRenderInput,
+              setMarker,
+              setGeneratedPoints,
+              xPoint,
+              yPoint,
+              rPoint,
+              numberOfPoints,
+              pointsOption
+            )
           }
         />
       </div>

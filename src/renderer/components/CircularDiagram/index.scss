@@ -10,7 +10,12 @@
     margin: auto;
     border-radius: 50%;
     background-color: var(--light-brown-primary);
-    cursor: crosshair;
+    &.marker {
+      cursor: crosshair;
+    }
+    &.no-marker {
+      pointer-events: none;
+    }
     .center {
       position: absolute;
       left: 50%;

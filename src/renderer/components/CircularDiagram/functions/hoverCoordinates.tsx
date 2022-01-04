@@ -1,9 +1,7 @@
+import { width, height, radius } from '..';
 // to reset coordinates on mouse movement
 export const hoverCoordinates = (
   e: any,
-  radius: number,
-  width: number,
-  height: number,
   setXVal: React.Dispatch<React.SetStateAction<number>>,
   setYVal: React.Dispatch<React.SetStateAction<number>>,
   setRVal: React.Dispatch<React.SetStateAction<number>>
