@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import CircularDiagram from '../CircularDiagram';
 import Tab from '../Tab';
 import Table from '../Table';
+import { Point } from '../Types';
 import './index.scss';
 
 interface LeftMainSide {
-  generatedPoints: {}[];
-  setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>;
+  generatedPoints: Point[][];
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
 }
 
 const LeftMainSide: React.FC<LeftMainSide> = ({

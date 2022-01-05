@@ -21,6 +21,7 @@ import {
   modifyPointsOptions,
   modifyColor,
 } from './functions/modificationFunctions';
+import { Point } from '../Types';
 
 // Constants
 export const radius = 100;
@@ -30,8 +31,8 @@ export const height =
   document.querySelector('#circle')?.getBoundingClientRect()?.height || 260;
 
 interface CircularDiagram {
-  generatedPoints: {}[];
-  setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>;
+  generatedPoints: Point[][];
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
 }
 const CircularDiagram: React.FC<CircularDiagram> = ({
   generatedPoints,

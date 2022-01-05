@@ -1,6 +1,7 @@
 import { getBoundX, getBoundY } from './bound-relative-coordinates';
 import { drawPoint, removePoint } from './drawPoint';
 import { radius } from '..';
+import { Point } from 'renderer/components/Types';
 
 const calculateAngle = (y: number, r: number) => {
   return Math.asin(y / r);
@@ -23,7 +24,7 @@ export const generatePoints = (
   setNamePoint: React.Dispatch<React.SetStateAction<string>>,
   setRenderInput: React.Dispatch<React.SetStateAction<boolean>>,
   setMarker: React.Dispatch<React.SetStateAction<boolean>>,
-  setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>,
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>,
   xPoint: number,
   yPoint: number,
   rPoint: number,
@@ -36,7 +37,7 @@ export const generatePoints = (
 ) => {
   setRenderInput(false);
   setMarker(true);
-  const pointsArray: {}[] = [];
+  const pointsArray: Point[] = [];
   if (numberOfPoints < 0) {
     return window.prompt('Please input a positive number');
   } else if (numberOfPoints == 0) {
