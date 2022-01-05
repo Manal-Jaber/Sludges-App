@@ -22,8 +22,6 @@ import {
   modifyColor,
 } from './functions/modificationFunctions';
 
-interface CircularDiagram {}
-
 // Constants
 export const radius = 100;
 export const width =
@@ -35,10 +33,10 @@ interface CircularDiagram {
   generatedPoints: {}[];
   setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>;
 }
-const CircularDiagram: React.FC<CircularDiagram> = (
+const CircularDiagram: React.FC<CircularDiagram> = ({
   generatedPoints,
-  setGeneratedPoints
-) => {
+  setGeneratedPoints,
+}) => {
   // React states
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
