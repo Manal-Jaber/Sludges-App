@@ -4,9 +4,15 @@ import Tab from '../Tab';
 import Table from '../Table';
 import './index.scss';
 
-interface LeftMainSide {}
+interface LeftMainSide {
+  generatedPoints: {}[];
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>;
+}
 
-const LeftMainSide: React.FC<LeftMainSide> = () => {
+const LeftMainSide: React.FC<LeftMainSide> = ({
+  generatedPoints,
+  setGeneratedPoints,
+}) => {
   const tabs = ['Circular Diagram', 'Table'];
 
   // React states
@@ -14,7 +20,12 @@ const LeftMainSide: React.FC<LeftMainSide> = () => {
 
   const renderedComponent = () => {
     if (selectedIndex === 0) {
-      return <CircularDiagram />;
+      return (
+        <CircularDiagram
+          generatedPoints={generatedPoints}
+          setGeneratedPoints={setGeneratedPoints}
+        />
+      );
     } else {
       return <Table />;
     }

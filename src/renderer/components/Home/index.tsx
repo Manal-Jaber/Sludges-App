@@ -6,11 +6,14 @@ import './index.scss';
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = ({}) => {
-  // const [generatedPoints, setGeneratedPoints] = useState([{}]);
+  const [generatedPoints, setGeneratedPoints] = useState([{}]);
   return (
     <div className="main-wrapper">
-      {/* <LeftMainSide generatedPoints={generatedPoints} stGeneratedPoint={setGeneratedPoints} /> */}
-      <LeftMainSide />
+      <LeftMainSide
+        generatedPoints={generatedPoints}
+        setGeneratedPoints={setGeneratedPoints}
+      />
+      {/* <LeftMainSide /> */}
       <RightMainSide />
     </div>
   );

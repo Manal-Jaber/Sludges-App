@@ -31,7 +31,14 @@ export const width =
 export const height =
   document.querySelector('#circle')?.getBoundingClientRect()?.height || 260;
 
-const CircularDiagram: React.FC<CircularDiagram> = () => {
+interface CircularDiagram {
+  generatedPoints: {}[];
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<{}[]>>;
+}
+const CircularDiagram: React.FC<CircularDiagram> = (
+  generatedPoints,
+  setGeneratedPoints
+) => {
   // React states
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
@@ -43,12 +50,12 @@ const CircularDiagram: React.FC<CircularDiagram> = () => {
   const [zPoint, setZPoint] = useState(0);
   const [namePoint, setNamePoint] = useState('A');
   const [marker, setMarker] = useState(true);
-  const [numberOfPoints, setNumberOfPoints] = useState(5);
+  const [numberOfPoints, setNumberOfPoints] = useState(1);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
   const [color, setColor] = useState('#A47A51');
   const [alpha, setAlpha] = useState(100);
-  const [generatedPoints, setGeneratedPoints] = useState([{}]);
+  // const [generatedPoints, setGeneratedPoints] = useState([[{}]]);
   console.log(generatedPoints);
   return (
     <div className="circular-diagram">
