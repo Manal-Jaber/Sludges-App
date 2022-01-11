@@ -21,7 +21,8 @@ import {
   modifyPointsOptions,
   modifyColor,
 } from './functions/modificationFunctions';
-import { Point } from '../Types';
+import { undo, redo } from './functions/undoRedo';
+import { Point } from 'renderer/components/Types/index';
 
 // Constants
 export const radius = 100;
@@ -55,7 +56,9 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [color, setColor] = useState('#A47A51');
   const [alpha, setAlpha] = useState(100);
   // const [generatedPoints, setGeneratedPoints] = useState([[{}]]);
-  console.log(generatedPoints);
+  const [undoStack, setUndoStack] = useState<Point[][]>([]);
+  const [redoStack, setRedoStack] = useState<Point[][]>([]);
+
   return (
     <div className="circular-diagram">
       <div className="circle-wrapper" id="circle-wrapper">
@@ -201,6 +204,19 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               pointsOption,
               color,
               alpha
+            )
+          }
+        />
+        <Button
+          text="Undo"
+          listener={() =>
+            undo(
+              undoStack,
+              setUndoStack,
+              redoStack,
+              setRedoStack,
+              generatedPoints,
+              setGeneratedPoints
             )
           }
         />
