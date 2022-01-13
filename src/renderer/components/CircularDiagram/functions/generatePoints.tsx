@@ -24,6 +24,7 @@ export const generatePoints = (
   setNamePoint: React.Dispatch<React.SetStateAction<string>>,
   setRenderInput: React.Dispatch<React.SetStateAction<boolean>>,
   setMarker: React.Dispatch<React.SetStateAction<boolean>>,
+  generatedPoints: Point[][],
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>,
   xPoint: number,
   yPoint: number,
@@ -33,7 +34,9 @@ export const generatePoints = (
   numberOfPoints: number,
   pointsOption: boolean,
   color: string,
-  alpha: number
+  alpha: number,
+  setUndoStack: React.Dispatch<React.SetStateAction<Point[][]>>,
+  setRedoStack: React.Dispatch<React.SetStateAction<Point[][]>>
 ) => {
   setRenderInput(false);
   setMarker(true);
@@ -46,9 +49,15 @@ export const generatePoints = (
     const xBound = getBoundX(xPoint);
     const yBound = getBoundY(yPoint);
     drawPoint(namePoint + '0', xBound, yBound, 'point', color, alpha);
-    return [
-      { point: namePoint + '0', x: xPoint, y: yPoint, r: rPoint, z: zPoint },
-    ];
+    pointsArray.push({
+      point: namePoint + '0',
+      x: xPoint,
+      y: yPoint,
+      r: rPoint,
+      z: zPoint,
+      color: color,
+      alpha: alpha,
+    });
   } else {
     if (pointsOption) {
       // false -> linear, true -> radial
@@ -64,6 +73,8 @@ export const generatePoints = (
           y: y,
           r: rPoint,
           z: zPoint,
+          color: color,
+          alpha: alpha,
         });
         const xBound = getBoundX(x);
         const yBound = getBoundY(y);
@@ -77,17 +88,27 @@ export const generatePoints = (
         const x = -xAround + (i + 1) * separatingDistance;
         const y = yPoint;
         const r = calculateR(x, y);
-        pointsArray.push({ point: namePoint + i, x: x, y: y, r: r, z: zPoint });
+        pointsArray.push({
+          point: namePoint + i,
+          x: x,
+          y: y,
+          r: r,
+          z: zPoint,
+          color: color,
+          alpha: alpha,
+        });
         const xBound = getBoundX(x);
         const yBound = getBoundY(y);
         drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
       }
     }
-    setGeneratedPoints((prev) => [...prev, pointsArray]);
-    removePoint(namePoint);
-    setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));
-    setZPoint(0);
-
-    return pointsArray;
   }
+  setUndoStack((prev) => [...prev, ...generatedPoints]);
+  setRedoStack([]);
+  setGeneratedPoints((prev) => [...prev, pointsArray]);
+  removePoint(namePoint);
+  setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));
+  setZPoint(0);
+
+  return pointsArray;
 };

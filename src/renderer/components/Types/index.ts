@@ -4,4 +4,6 @@ export interface Point {
   y: number;
   r: number;
   z: number;
+  color?: string;
+  alpha?: number;
 }

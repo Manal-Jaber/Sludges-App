@@ -4,7 +4,6 @@ import './index.scss';
 
 // importing for color picker
 import 'rc-color-picker/assets/index.css';
-import ReactDOM from 'react-dom';
 import ColorPicker from 'rc-color-picker';
 
 // importing functions
@@ -55,9 +54,20 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [renderInput, setRenderInput] = useState(false);
   const [color, setColor] = useState('#A47A51');
   const [alpha, setAlpha] = useState(100);
-  // const [generatedPoints, setGeneratedPoints] = useState([[{}]]);
   const [undoStack, setUndoStack] = useState<Point[][]>([]);
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
+
+  useEffect(() => {
+    console.log('gen');
+    console.log(
+      'gen',
+      generatedPoints,
+      'undoStack',
+      undoStack,
+      'redoStack',
+      redoStack
+    );
+  }, [generatedPoints]);
 
   return (
     <div className="circular-diagram">
@@ -91,6 +101,36 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
             <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
           </svg>
         </svg>
+        <div className="buttons">
+          <Button
+            text="Undo"
+            listener={() =>
+              undo(
+                undoStack,
+                setUndoStack,
+                redoStack,
+                setRedoStack,
+                generatedPoints,
+                setGeneratedPoints,
+                setNamePoint
+              )
+            }
+          />
+          <Button
+            text="Redo"
+            listener={() =>
+              redo(
+                undoStack,
+                setUndoStack,
+                redoStack,
+                setRedoStack,
+                generatedPoints,
+                setGeneratedPoints,
+                setNamePoint
+              )
+            }
+          />
+        </div>
       </div>
       <div className="data-table">
         <span className="data-def">{namePoint}</span>
@@ -194,6 +234,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               setNamePoint,
               setRenderInput,
               setMarker,
+              generatedPoints,
               setGeneratedPoints,
               xPoint,
               yPoint,
@@ -203,20 +244,9 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               numberOfPoints,
               pointsOption,
               color,
-              alpha
-            )
-          }
-        />
-        <Button
-          text="Undo"
-          listener={() =>
-            undo(
-              undoStack,
+              alpha,
               setUndoStack,
-              redoStack,
-              setRedoStack,
-              generatedPoints,
-              setGeneratedPoints
+              setRedoStack
             )
           }
         />
