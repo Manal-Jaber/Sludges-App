@@ -101,9 +101,13 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
             <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
           </svg>
         </svg>
+      </div>
+      <div className="first-row">
+        <span className="name-point">{namePoint}</span>
         <div className="buttons">
           <Button
             text="Undo"
+            className="undo-redo-btn"
             listener={() =>
               undo(
                 undoStack,
@@ -118,6 +122,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           />
           <Button
             text="Redo"
+            className="undo-redo-btn"
             listener={() =>
               redo(
                 undoStack,
@@ -133,7 +138,6 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
         </div>
       </div>
       <div className="data-table">
-        <span className="data-def">{namePoint}</span>
         <div className="data-def">
           <span className="data-name">X: </span>
           {renderInput ? (

@@ -23,8 +23,31 @@
       transform: translate(-50%, -50%);
     }
   }
-  .data-table {
+  .first-row {
     margin-top: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .name-point {
+      padding: 0.5rem 1rem;
+      margin-left: 2rem;
+      background-color: var(--dark-brown-primary);
+      color: var(--light-brown-primary);
+      border-radius: 10px 0;
+      border: solid;
+      border-width: 0 0 1.5px 1.5px;
+      border-color: var(--light-brown-primary);
+    }
+    .buttons {
+      .undo-redo-btn {
+        border-radius: 0 10px;
+        border: solid;
+        border-width: 0 1.5px 1.5px 0;
+        border-color: var(--light-brown-primary);
+      }
+    }
+  }
+  .data-table {
     background-color: var(--dark-brown-primary);
     color: var(--light-brown-primary);
     display: flex;
