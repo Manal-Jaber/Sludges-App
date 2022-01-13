@@ -103,7 +103,8 @@ export const generatePoints = (
       }
     }
   }
-  setUndoStack((prev) => [...prev, ...generatedPoints]);
+  // setUndoStack((prev) => [...prev, ...generatedPoints]);
+  setUndoStack(generatedPoints);
   setRedoStack([]);
   setGeneratedPoints((prev) => [...prev, pointsArray]);
   removePoint(namePoint);

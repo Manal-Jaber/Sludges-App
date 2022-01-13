@@ -18,17 +18,12 @@ export const undo = (
   setNamePoint: React.Dispatch<React.SetStateAction<string>>
 ) => {
   setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) - 1));
-  setUndoStack((prev) => {
-    prev.pop();
-    return prev;
-  });
-  setRedoStack([...redoStack, generatedPoints.pop() || []]);
-  generatedPoints.pop()?.forEach((item) => removePoint(item.point));
-  console.log(generatedPoints.pop());
-  setGeneratedPoints((prev) => {
-    prev.pop();
-    return prev;
-  });
+  setUndoStack((prev) => prev.slice(0, -1));
+  setRedoStack([...redoStack, generatedPoints[generatedPoints.length - 1]!]);
+  generatedPoints[generatedPoints.length - 1]?.forEach((item) =>
+    removePoint(item.point)
+  );
+  setGeneratedPoints((prev) => prev.slice(0, -1));
   console.log('undo');
   console.log(
     'gen',
@@ -49,7 +44,7 @@ export const redo = (
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>,
   setNamePoint: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  redoStack.pop()?.forEach((item) => {
+  redoStack[redoStack.length - 1]?.forEach((item) => {
     const xBound = getBoundX(item.x);
     const yBound = getBoundY(item.y);
     return drawPoint(
@@ -62,12 +57,12 @@ export const redo = (
     );
   });
   setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));
-  setUndoStack((prev) => [...prev, generatedPoints.pop() || []]);
-  setGeneratedPoints((prev) => [...prev, redoStack.pop() || []]);
-  setRedoStack((prev) => {
-    prev.pop();
-    return prev;
-  });
+  setUndoStack((prev) => [
+    ...prev,
+    generatedPoints[generatedPoints.length - 1],
+  ]);
+  setGeneratedPoints((prev) => [...prev, redoStack[redoStack.length - 1]]);
+  setRedoStack((prev) => prev.slice(0, -1));
   console.log('redo', generatedPoints);
   console.log(
     'gen',

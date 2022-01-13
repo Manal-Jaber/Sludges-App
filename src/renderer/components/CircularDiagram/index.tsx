@@ -22,6 +22,7 @@ import {
 } from './functions/modificationFunctions';
 import { undo, redo } from './functions/undoRedo';
 import { Point } from 'renderer/components/Types/index';
+import { drawPoint } from './functions/drawPoint';
 
 // Constants
 export const radius = 100;
@@ -58,15 +59,15 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
 
   useEffect(() => {
-    console.log('gen');
-    console.log(
-      'gen',
-      generatedPoints,
-      'undoStack',
-      undoStack,
-      'redoStack',
-      redoStack
-    );
+    // console.log('gen');
+    // console.log(
+    //   'gen',
+    //   generatedPoints,
+    //   'undoStack',
+    //   undoStack,
+    //   'redoStack',
+    //   redoStack
+    // );
   }, [generatedPoints]);
 
   return (
@@ -108,6 +109,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           <Button
             text="Undo"
             className="undo-redo-btn"
+            disabled={undoStack === []}
             listener={() =>
               undo(
                 undoStack,
@@ -123,6 +125,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           <Button
             text="Redo"
             className="undo-redo-btn"
+            disabled={redoStack === []}
             listener={() =>
               redo(
                 undoStack,
