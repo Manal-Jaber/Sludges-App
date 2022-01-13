@@ -9,4 +9,11 @@
     background-color: var(--light-brown-primary);
     color: var(--dark-brown-primary);
   }
+  &:disabled {
+    cursor: unset;
+    &:hover {
+      background-color: var(--dark-brown-primary);
+      color: var(--light-brown-primary);
+    }
+  }
 }

@@ -17,6 +17,7 @@ export const undo = (
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>,
   setNamePoint: React.Dispatch<React.SetStateAction<string>>
 ) => {
+  if (undoStack.length === 0 && generatedPoints.length === 0) return;
   setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) - 1));
   setUndoStack((prev) => prev.slice(0, -1));
   setRedoStack([...redoStack, generatedPoints[generatedPoints.length - 1]!]);
@@ -24,15 +25,6 @@ export const undo = (
     removePoint(item.point)
   );
   setGeneratedPoints((prev) => prev.slice(0, -1));
-  console.log('undo');
-  console.log(
-    'gen',
-    generatedPoints,
-    'undoStack',
-    undoStack,
-    'redoStack',
-    redoStack
-  );
 };
 
 export const redo = (
@@ -56,20 +48,13 @@ export const redo = (
       item.alpha
     );
   });
+  if (redoStack.length === 0) return;
   setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));
-  setUndoStack((prev) => [
-    ...prev,
-    generatedPoints[generatedPoints.length - 1],
-  ]);
+  setUndoStack((prev) =>
+    generatedPoints.length !== 0
+      ? [...prev, generatedPoints[generatedPoints.length - 1]]
+      : [...prev]
+  );
   setGeneratedPoints((prev) => [...prev, redoStack[redoStack.length - 1]]);
   setRedoStack((prev) => prev.slice(0, -1));
-  console.log('redo', generatedPoints);
-  console.log(
-    'gen',
-    generatedPoints,
-    'undoStack',
-    undoStack,
-    'redoStack',
-    redoStack
-  );
 };

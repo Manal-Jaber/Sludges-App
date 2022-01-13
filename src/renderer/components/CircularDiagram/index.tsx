@@ -58,18 +58,6 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [undoStack, setUndoStack] = useState<Point[][]>([]);
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
 
-  useEffect(() => {
-    // console.log('gen');
-    // console.log(
-    //   'gen',
-    //   generatedPoints,
-    //   'undoStack',
-    //   undoStack,
-    //   'redoStack',
-    //   redoStack
-    // );
-  }, [generatedPoints]);
-
   return (
     <div className="circular-diagram">
       <div className="circle-wrapper" id="circle-wrapper">
@@ -109,7 +97,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           <Button
             text="Undo"
             className="undo-redo-btn"
-            disabled={undoStack === []}
+            disabled={undoStack.length === 0 && generatedPoints.length === 0}
             listener={() =>
               undo(
                 undoStack,
@@ -125,7 +113,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           <Button
             text="Redo"
             className="undo-redo-btn"
-            disabled={redoStack === []}
+            disabled={redoStack.length === 0}
             listener={() =>
               redo(
                 undoStack,
