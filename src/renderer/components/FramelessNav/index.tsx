@@ -4,14 +4,15 @@ import './index.scss';
 interface FramelessNav {}
 
 const FramelessNav: React.FC<FramelessNav> = () => {
-  // Listeners
-  /**
-   * TODO:
-   * Need to add below listeners
-   */
-  const minimizeWindow = () => {};
-  const maximizeWindow = () => {};
-  const closeWindow = () => {};
+  const minimizeWindow = async () => {
+    await window.electron.min();
+  };
+  const maximizeWindow = async () => {
+    await window.electron.max();
+  };
+  const closeWindow = async () => {
+    await window.electron.close();
+  };
 
   return (
     <div className="frameless-nav">

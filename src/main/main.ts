@@ -33,6 +33,25 @@ ipcMain.on('ipc-example', async (event, arg) => {
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
+ipcMain.handle('min', async () => {
+  mainWindow?.minimize();
+  return null;
+});
+
+ipcMain.handle('max', async () => {
+  if (mainWindow?.isMaximized()) {
+    mainWindow?.restore();
+  } else {
+    mainWindow?.maximize();
+  }
+  return null;
+});
+
+ipcMain.handle('close', async () => {
+  mainWindow?.close();
+  return null;
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();

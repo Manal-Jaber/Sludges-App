@@ -1,6 +1,9 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
 contextBridge.exposeInMainWorld('electron', {
+  min: () => ipcRenderer.invoke('min'),
+  max: () => ipcRenderer.invoke('max'),
+  close: () => ipcRenderer.invoke('close'),
   ipcRenderer: {
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
