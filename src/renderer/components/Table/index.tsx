@@ -14,34 +14,19 @@ interface Table {
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
 }
 
-// {
-/* TODO: to be removed after adding states and legit data */
-// }
-const point: Point2 = {
-  point: 'A0',
-  x: 10,
-  y: 20,
-  r: 30,
-};
-
-const points: Point2[] = [point, point, point, point, point];
-
 const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
   // Listeners
   const exportTable = () => {
     // here we should apply the data stored in the state holding the array of generated points
-    const worksheet = XLSX.utils.json_to_sheet([
-      {
-        id: 1,
-        name: 'Mohammad',
-        age: 22,
-      },
-      {
-        id: 2,
-        name: 'Manal',
-        age: 22,
-      },
-    ]);
+    const worksheetArray: Point[] = [];
+    generatedPoints.forEach((collection) => {
+      collection.forEach((item) => {
+        const worksheetPoint = (({ color, alpha, ...o }) => o)(item);
+        worksheetArray.push(worksheetPoint);
+      });
+    });
+
+    const worksheet = XLSX.utils.json_to_sheet(worksheetArray);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'points');
     // Buffer
