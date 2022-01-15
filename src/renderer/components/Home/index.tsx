@@ -8,12 +8,15 @@ interface HomeProps {}
 
 const Home: React.FC<HomeProps> = ({}) => {
   const [generatedPoints, setGeneratedPoints] = useState<Point[][]>([]);
+  const [namePoint, setNamePoint] = useState('A');
 
   return (
     <div className="main-wrapper">
       <LeftMainSide
         generatedPoints={generatedPoints}
         setGeneratedPoints={setGeneratedPoints}
+        namePoint={namePoint}
+        setNamePoint={setNamePoint}
       />
       {/* <LeftMainSide /> */}
       <RightMainSide />

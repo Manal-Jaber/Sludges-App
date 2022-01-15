@@ -8,11 +8,15 @@ import './index.scss';
 interface LeftMainSide {
   generatedPoints: Point[][];
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
+  namePoint: string;
+  setNamePoint: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const LeftMainSide: React.FC<LeftMainSide> = ({
   generatedPoints,
   setGeneratedPoints,
+  namePoint,
+  setNamePoint,
 }) => {
   const tabs = ['Circular Diagram', 'Table'];
 
@@ -25,10 +29,17 @@ const LeftMainSide: React.FC<LeftMainSide> = ({
         <CircularDiagram
           generatedPoints={generatedPoints}
           setGeneratedPoints={setGeneratedPoints}
+          namePoint={namePoint}
+          setNamePoint={setNamePoint}
         />
       );
     } else {
-      return <Table />;
+      return (
+        <Table
+          generatedPoints={generatedPoints}
+          setGeneratedPoints={setGeneratedPoints}
+        />
+      );
     }
   };
 

@@ -20,6 +20,10 @@ import {
   modifyPointsOptions,
   modifyColor,
 } from './functions/modificationFunctions';
+import {
+  getBoundX,
+  getBoundY,
+} from 'renderer/components/CircularDiagram/functions/bound-relative-coordinates';
 import { undo, redo } from './functions/undoRedo';
 import { Point } from 'renderer/components/Types/index';
 import { drawPoint } from './functions/drawPoint';
@@ -34,10 +38,14 @@ export const height =
 interface CircularDiagram {
   generatedPoints: Point[][];
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
+  namePoint: string;
+  setNamePoint: React.Dispatch<React.SetStateAction<string>>;
 }
 const CircularDiagram: React.FC<CircularDiagram> = ({
   generatedPoints,
   setGeneratedPoints,
+  namePoint,
+  setNamePoint,
 }) => {
   // React states
   const [xVal, setXVal] = useState(0);
@@ -48,7 +56,6 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [yPoint, setYPoint] = useState(0);
   const [rPoint, setRPoint] = useState(0);
   const [zPoint, setZPoint] = useState(0);
-  const [namePoint, setNamePoint] = useState('A');
   const [marker, setMarker] = useState(true);
   const [numberOfPoints, setNumberOfPoints] = useState(1);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
@@ -57,6 +64,22 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [alpha, setAlpha] = useState(100);
   const [undoStack, setUndoStack] = useState<Point[][]>([]);
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
+  useEffect(() => {
+    generatedPoints.forEach((collection) =>
+      collection.forEach((item) => {
+        const xBound = getBoundX(item.x);
+        const yBound = getBoundY(item.y);
+        return drawPoint(
+          item.point,
+          xBound,
+          yBound,
+          'point',
+          item.color,
+          item.alpha
+        );
+      })
+    );
+  }, []);
 
   return (
     <div className="circular-diagram">

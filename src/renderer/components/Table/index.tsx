@@ -1,24 +1,32 @@
 import React from 'react';
 import Button from '../Button';
 import XLSX from 'xlsx';
-import { Point } from './Types';
+import { Point2 } from './Types';
+
 import './index.scss';
+import { Point } from 'renderer/components/Types/index';
 
-interface Table {}
+// importing functions
+import { zTableModify } from 'renderer/components/Table/functions/zTableModify';
 
-{
-  /* TODO: to be removed after adding states and legit data */
+interface Table {
+  generatedPoints: Point[][];
+  setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
 }
-const point: Point = {
+
+// {
+/* TODO: to be removed after adding states and legit data */
+// }
+const point: Point2 = {
   point: 'A0',
   x: 10,
   y: 20,
   r: 30,
 };
 
-const points: Point[] = [point, point, point, point, point];
+const points: Point2[] = [point, point, point, point, point];
 
-const Table: React.FC<Table> = () => {
+const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
   // Listeners
   const exportTable = () => {
     // here we should apply the data stored in the state holding the array of generated points
@@ -56,16 +64,49 @@ const Table: React.FC<Table> = () => {
         </thead>
         <tbody>
           {/* TODO: to be replaced with state */}
-          {points.map((point, index) => {
+          {generatedPoints.map((collection, collectionIndex) => {
             return (
-              <tr key={index}>
-                {Object.entries(point).map((value, key) => {
-                  return <td key={key}>{value[1]}</td>;
+              <>
+                {collection.map((point, pointIndex) => {
+                  return (
+                    <tr key={pointIndex}>
+                      {Object.entries(point)
+                        .slice(0, -3)
+                        .map((attribute, key) => {
+                          const value = attribute[1];
+                          const roundedValue =
+                            typeof value === 'number'
+                              ? Math.round(value * 100) / 100
+                              : value;
+                          return (
+                            <td
+                              key={key}
+                              style={{ color: key === 0 ? point.color : '' }}
+                            >
+                              {roundedValue}
+                            </td>
+                          );
+                        })}
+                      <td>
+                        <input
+                          className="z-input"
+                          value={point.z}
+                          min={0}
+                          type="number"
+                          onChange={(e) =>
+                            zTableModify(
+                              e,
+                              collectionIndex,
+                              pointIndex,
+                              setGeneratedPoints
+                            )
+                          }
+                        />
+                      </td>
+                    </tr>
+                  );
                 })}
-                <td>
-                  <input className="z-input" min={0} type="number" />
-                </td>
-              </tr>
+              </>
             );
           })}
         </tbody>
