@@ -19,7 +19,7 @@ const Home: React.FC<HomeProps> = ({}) => {
         setNamePoint={setNamePoint}
       />
       {/* <LeftMainSide /> */}
-      <RightMainSide />
+      <RightMainSide generatedPoints={generatedPoints} />
     </div>
   );
 };

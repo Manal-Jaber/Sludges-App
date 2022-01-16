@@ -1,7 +1,6 @@
 import React from 'react';
 import Button from '../Button';
 import XLSX from 'xlsx';
-import { Point2 } from './Types';
 
 import './index.scss';
 import { Point } from 'renderer/components/Types/index';

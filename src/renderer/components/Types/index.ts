@@ -7,3 +7,10 @@ export interface Point {
   color?: string;
   alpha?: number;
 }
+export interface data {
+  id: number[];
+  name: string[];
+  x: number[];
+  y: number[];
+  z: number[][];
+}
