@@ -46,6 +46,7 @@ const ContourDiagram: React.FC<ContourDiagram> = ({ data }) => {
             zsmooth: 'best',
             mode: 'gauge+number+delta',
             marker: { color: 'red' },
+            // for Mohammad: link I told you about https://plotly.com/javascript/3d-surface-plots/
             // contours: {
             //   z: {
             //     show:true,
