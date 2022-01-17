@@ -65,7 +65,7 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
     } else if (selectedIndex === 1) {
       return <ContourDiagram data={data} />;
     } else {
-      return <Volume />;
+      return <Volume z={zTemp} />;
     }
   };
 

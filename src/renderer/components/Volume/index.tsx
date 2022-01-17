@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import Button from '../Button';
 import './index.scss';
 
-interface Volume {}
+interface Volume {
+  z: number[];
+}
 
-const Volume: React.FC<Volume> = () => {
+const Volume: React.FC<Volume> = ({ z }) => {
   // React states
   const [diameter, setDiameter] = useState(0);
   const [height, setHeight] = useState(0);
@@ -22,9 +24,11 @@ const Volume: React.FC<Volume> = () => {
   const exportDocument = () => {};
 
   const calcVolume = () => {
+    const average = (arr: number[]) =>
+      arr.reduce((a, b) => a + b, 0) / arr.length;
     setResult({
       render: true,
-      value: +diameter + +height, // dummy equation
+      value: (Math.PI / 3) * (diameter / 2) ** 2 * (average(z) - height), // dummy equation
     });
   };
 

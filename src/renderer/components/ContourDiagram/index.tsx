@@ -43,7 +43,6 @@ const ContourDiagram: React.FC<ContourDiagram> = ({ data }) => {
             //   [0, 0, 9.77, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             // ],
             type: 'surface',
-            zsmooth: 'best',
             mode: 'gauge+number+delta',
             marker: { color: 'red' },
             // for Mohammad: link I told you about:

@@ -14,6 +14,17 @@ export const drawPoint = (
     'http://www.w3.org/2000/svg',
     'circle'
   );
+  let textElement = document.createElementNS(
+    'http://www.w3.org/2000/svg',
+    'text'
+  );
+  let myText = document.createTextNode(name);
+  textElement.setAttribute('x', '5');
+  textElement.setAttribute('y', '5');
+  textElement.setAttribute('fill', color || '#A47A51');
+  textElement.setAttribute('font-family', 'Verdana');
+  textElement.setAttribute('font-size', '5');
+  textElement.appendChild(myText);
   newElement.setAttribute(
     'fill',
     indicator === 'marker' ? 'none' : color || '#A47A51'
@@ -25,10 +36,11 @@ export const drawPoint = (
   newElement.setAttribute('cy', '2.5');
   newElement.setAttribute('r', '2');
   svgElement.appendChild(newElement);
+  svgElement.appendChild(textElement);
   svgElement.setAttribute('x', String(x));
   svgElement.setAttribute('y', String(y));
-  svgElement.setAttribute('height', '5');
-  svgElement.setAttribute('width', '5');
+  svgElement.setAttribute('height', '15');
+  svgElement.setAttribute('width', '15');
   svgElement.setAttribute('id', name);
   document.querySelector('#circle')?.appendChild(svgElement);
 };
