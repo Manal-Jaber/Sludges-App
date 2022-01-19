@@ -42,20 +42,26 @@ const ContourDiagram: React.FC<ContourDiagram> = ({ data }) => {
             //   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12.93, 0, 0, 0, 0],
             //   [0, 0, 9.77, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
             // ],
+            labels: data.name,
+            hoverlabel: {
+              align: 'auto',
+              bgcolor: 'green',
+            },
             type: 'surface',
             mode: 'gauge+number+delta',
             marker: { color: 'red' },
-            // for Mohammad: link I told you about:
-            // https://plotly.com/javascript/3d-surface-plots/#surface-plot-with-contours
-
-            // contours: {
-            //   z: {
-            //     show:true,
-            //     usecolormap: true,
-            //     highlightcolor:"#42f462",
-            //     project:{z: true}
-            //   }
+            // hidesurface: true,
+            // lighting: {
+            //   roughness: 0.1,
             // },
+            contours: {
+              z: {
+                show: true,
+                usecolormap: true,
+                highlightcolor: '#42f462',
+                project: { z: true },
+              },
+            },
           },
         ]}
         layout={{
