@@ -54,16 +54,34 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
     data.z.push(newArr);
   });
   console.log(data);
+
+  // fitting data
+  var fitCurve = require('fit-curve');
+  const dataNew: number[][] = [];
+  generatedPoints.forEach((collection, collectionIndex) => {
+    collection.forEach((point, pointIndex) => {
+      const dataPoint = (({ color, alpha, r, point, ...o }) => o)(point);
+      const pointCoordinates: number[] = [];
+      Object.entries(dataPoint).map((attribute, attributeIndex) => {
+        const key: string = attribute[0];
+        const value: number = attribute[1];
+        pointCoordinates.push(value);
+      });
+      dataNew.push(pointCoordinates);
+    });
+  });
+  const curvePoints = fitCurve(dataNew);
+  console.log(curvePoints);
   const tabs = ['3D Surface Plot', 'Contour Diagram', 'Volume'];
 
   // React states
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const renderedComponent = (data: data) => {
+  const renderedComponent = (dataNew: number[][]) => {
     if (selectedIndex === 0) {
-      return <SurfacePlot data={data} />;
+      return <SurfacePlot data={dataNew} />;
     } else if (selectedIndex === 1) {
-      return <ContourDiagram data={data} />;
+      return <ContourDiagram data={dataNew} />;
     } else {
       return <Volume z={zTemp} />;
     }
@@ -76,7 +94,7 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
         selectedIndex={selectedIndex}
         setSelectedIndex={setSelectedIndex}
       />
-      {renderedComponent(data)}
+      {renderedComponent(dataNew)}
     </div>
   );
 };
