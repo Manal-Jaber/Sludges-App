@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Plot from 'react-plotly.js';
 import { data } from 'renderer/components/Types/index';
 
@@ -9,8 +9,24 @@ interface SurfacePlot {
 }
 
 const SurfacePlot: React.FC<SurfacePlot> = ({ data }) => {
+  // Listeners
+  const onTitleChange = (e: any) => {
+    e.target.id === 'diagramTitle' && setDiagramTitle(e.target.value);
+  };
+
+  // React states
+  const [diagramTitle, setDiagramTitle] = useState('');
+
   return (
     <div className="surface-plot">
+      <div className="input-control">
+        <input
+          placeholder="3D Surface Plot Title"
+          id="diagramTitle"
+          value={diagramTitle}
+          onChange={onTitleChange}
+        />
+      </div>
       <Plot
         data={[
           {
@@ -52,7 +68,7 @@ const SurfacePlot: React.FC<SurfacePlot> = ({ data }) => {
           },
         ]}
         layout={{
-          title: 'A Fancy Plot',
+          title: diagramTitle,
           autosize: false,
           width: 450,
           height: 410,

@@ -1,3 +1,21 @@
 .surface-plot {
   margin-top: 2rem;
+  .input-control {
+    margin-bottom: 2rem;
+    width: 100%;
+    input {
+      width: 100%;
+      color: var(--dark-brown-primary);
+      border-radius: 4px;
+      border: none;
+      padding: 1rem;
+      background-color: var(--v-light-blue-secondary);
+      &::placeholder {
+        color: var(--dark-brown-primary);
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+  }
 }
