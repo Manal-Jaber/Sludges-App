@@ -1,6 +1,5 @@
 import { getBoundX, getBoundY } from './bound-relative-coordinates';
 import { drawPoint, removePoint } from './drawPoint';
-import { radius } from '..';
 import { Point } from 'renderer/components/Types';
 
 const calculateAngle = (y: number, r: number) => {
@@ -20,6 +19,7 @@ const calculateR = (x: number, y: number) => {
 };
 
 export const generatePoints = (
+  radius: number,
   namePoint: string,
   setNamePoint: React.Dispatch<React.SetStateAction<string>>,
   setRenderInput: React.Dispatch<React.SetStateAction<boolean>>,
@@ -46,8 +46,8 @@ export const generatePoints = (
   } else if (numberOfPoints == 0) {
     return;
   } else if (numberOfPoints == 1) {
-    const xBound = getBoundX(xPoint);
-    const yBound = getBoundY(yPoint);
+    const xBound = getBoundX(radius, xPoint);
+    const yBound = getBoundY(radius, yPoint);
     drawPoint(namePoint + '0', xBound, yBound, 'point', color, alpha);
     pointsArray.push({
       point: namePoint + '0',
@@ -76,8 +76,8 @@ export const generatePoints = (
           color: color,
           alpha: alpha,
         });
-        const xBound = getBoundX(x);
-        const yBound = getBoundY(y);
+        const xBound = getBoundX(radius, x);
+        const yBound = getBoundY(radius, y);
         drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
       }
     } else {
@@ -97,8 +97,8 @@ export const generatePoints = (
           color: color,
           alpha: alpha,
         });
-        const xBound = getBoundX(x);
-        const yBound = getBoundY(y);
+        const xBound = getBoundX(radius, x);
+        const yBound = getBoundY(radius, y);
         drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
       }
     }

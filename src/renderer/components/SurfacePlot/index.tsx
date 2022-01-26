@@ -17,6 +17,7 @@ const SurfacePlot: React.FC<SurfacePlot> = ({ data }) => {
             x: data.x,
             y: data.y,
             z: data.z,
+
             // x: [
             //   6.55, 8.1, 8.14, 8.8, 8.97, 9.15, 9.74, 10.29, 10.32, 10.96,
             //   11.04, 11.97, 12.22, 17.79, 18.78,
@@ -53,7 +54,7 @@ const SurfacePlot: React.FC<SurfacePlot> = ({ data }) => {
         layout={{
           title: 'A Fancy Plot',
           autosize: false,
-          width: 350,
+          width: 450,
           height: 410,
           margin: {
             l: 65,

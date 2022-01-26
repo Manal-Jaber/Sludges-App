@@ -3,6 +3,7 @@ import { drawPoint } from './drawPoint';
 // to assign coordinates on mouse click
 export const assignCoordinates = (
   e: any,
+  radius: number,
   namePoint: string,
   setRenderInput: React.Dispatch<React.SetStateAction<boolean>>,
   setMarker: React.Dispatch<React.SetStateAction<boolean>>,
@@ -17,8 +18,8 @@ export const assignCoordinates = (
   const xBound = e.nativeEvent.offsetX;
   const yBound = e.nativeEvent.offsetY;
   // X and Y relative coordinates ranging in [-100, 100]
-  const xRelative = getRelativeX(xBound);
-  const yRelative = getRelativeY(yBound);
+  const xRelative = getRelativeX(radius, xBound);
+  const yRelative = getRelativeY(radius, yBound);
   // radius
   const rRelative = Math.sqrt(xRelative ** 2 + yRelative ** 2);
   // setting coordinates to the nearest hundredth

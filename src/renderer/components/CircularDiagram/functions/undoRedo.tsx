@@ -28,6 +28,7 @@ export const undo = (
 };
 
 export const redo = (
+  radius: number,
   undoStack: Point[][],
   setUndoStack: React.Dispatch<React.SetStateAction<Point[][]>>,
   redoStack: Point[][],
@@ -37,8 +38,8 @@ export const redo = (
   setNamePoint: React.Dispatch<React.SetStateAction<string>>
 ) => {
   redoStack[redoStack.length - 1]?.forEach((item) => {
-    const xBound = getBoundX(item.x);
-    const yBound = getBoundY(item.y);
+    const xBound = getBoundX(radius, item.x);
+    const yBound = getBoundY(radius, item.y);
     return drawPoint(
       item.point,
       xBound,

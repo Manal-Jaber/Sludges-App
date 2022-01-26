@@ -29,7 +29,6 @@ import { Point } from 'renderer/components/Types/index';
 import { drawPoint } from './functions/drawPoint';
 
 // Constants
-export const radius = 100;
 export const width =
   document.querySelector('#circle')?.getBoundingClientRect()?.width || 260;
 export const height =
@@ -48,6 +47,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   setNamePoint,
 }) => {
   // React states
+  const [radius, setRadius] = useState(100);
   const [xVal, setXVal] = useState(0);
   const [yVal, setYVal] = useState(0);
   const [rVal, setRVal] = useState(0);
@@ -67,8 +67,8 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   useEffect(() => {
     generatedPoints.forEach((collection) =>
       collection.forEach((item) => {
-        const xBound = getBoundX(item.x);
-        const yBound = getBoundY(item.y);
+        const xBound = getBoundX(radius, item.x);
+        const yBound = getBoundY(radius, item.y);
         return drawPoint(
           item.point,
           xBound,
@@ -87,10 +87,13 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
         <svg
           className={`circle ${marker ? 'marker' : 'no-marker'}`}
           id="circle"
-          onMouseMove={(e) => hoverCoordinates(e, setXVal, setYVal, setRVal)}
+          onMouseMove={(e) =>
+            hoverCoordinates(e, radius, setXVal, setYVal, setRVal)
+          }
           onClick={(e: any) =>
             assignCoordinates(
               e,
+              radius,
               namePoint,
               setRenderInput,
               setMarker,
@@ -113,6 +116,16 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
             <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
           </svg>
         </svg>
+        <div className="circle-details">
+          <label className="circle-diameter">
+            Radius (m):
+            <input
+              type="number"
+              value={radius}
+              onChange={(e: any) => setRadius(parseInt(e.target.value))}
+            />
+          </label>
+        </div>
       </div>
       <div className="first-row">
         <span className="name-point">{namePoint}</span>
@@ -139,6 +152,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
             disabled={redoStack.length === 0}
             listener={() =>
               redo(
+                radius,
                 undoStack,
                 setUndoStack,
                 redoStack,
@@ -248,6 +262,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           text="Generate Points"
           listener={() =>
             generatePoints(
+              radius,
               namePoint,
               setNamePoint,
               setRenderInput,

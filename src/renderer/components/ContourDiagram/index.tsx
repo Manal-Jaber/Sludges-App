@@ -67,7 +67,7 @@ const ContourDiagram: React.FC<ContourDiagram> = ({ data }) => {
         layout={{
           title: 'A Fancy Plot',
           autosize: false,
-          width: 350,
+          width: 450,
           height: 410,
           margin: {
             l: 65,

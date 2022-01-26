@@ -2,25 +2,45 @@
   margin-top: 1.5rem;
   .circle-wrapper {
     width: 100%;
-  }
-  .circle {
-    position: relative;
-    width: 260px;
-    height: 260px;
-    margin: auto;
-    border-radius: 50%;
-    background-color: var(--light-brown-primary);
-    &.marker {
-      cursor: crosshair;
+    display: flex;
+    flex-direction: row;
+    .circle {
+      position: relative;
+      width: 260px;
+      height: 260px;
+      margin: auto;
+      border-radius: 50%;
+      background-color: var(--light-brown-primary);
+      &.marker {
+        cursor: crosshair;
+      }
+      &.no-marker {
+        pointer-events: none;
+      }
+      .center {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
     }
-    &.no-marker {
-      pointer-events: none;
-    }
-    .center {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .circle-details {
+      width: 100px;
+      .circle-diameter {
+        color: var(--light-brown-primary);
+        input {
+          margin-top: 0.25rem;
+          width: 75px;
+          color: var(--dark-brown-primary);
+          background-color: var(--v-light-blue-secondary);
+          text-align: center;
+          height: 22px;
+          border: none;
+          &:focus {
+            outline: none;
+          }
+        }
+      }
     }
   }
   .first-row {
