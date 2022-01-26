@@ -20,7 +20,7 @@ const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
     const worksheetArray: Point[] = [];
     generatedPoints.forEach((collection) => {
       collection.forEach((item) => {
-        const worksheetPoint = (({ color, alpha, ...o }) => o)(item);
+        const worksheetPoint = (({ color, ...o }) => o)(item);
         worksheetArray.push(worksheetPoint);
       });
     });

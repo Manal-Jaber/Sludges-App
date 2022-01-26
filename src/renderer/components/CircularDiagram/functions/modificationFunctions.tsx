@@ -66,9 +66,15 @@ export const modifyPointsOptions = (
 // Changing Color
 export const modifyColor = (
   e: any,
-  setColor: React.Dispatch<React.SetStateAction<string>>,
-  setAlpha: React.Dispatch<React.SetStateAction<number>>
+  setColor: React.Dispatch<React.SetStateAction<string>>
 ) => {
   setColor(e.color);
-  setAlpha(e.alpha);
+};
+
+// Changing Background Color
+export const modifyBackgroundColor = (
+  e: any,
+  setBackgroundColor: React.Dispatch<React.SetStateAction<string>>
+) => {
+  setBackgroundColor(e.color);
 };

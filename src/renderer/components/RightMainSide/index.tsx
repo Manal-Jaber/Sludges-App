@@ -5,7 +5,6 @@ import Tab from '../Tab';
 import Volume from '../Volume';
 import { Point, data } from 'renderer/components/Types/index';
 import './index.scss';
-import { ids } from 'webpack';
 
 interface RightMainSide {
   generatedPoints: Point[][];
@@ -24,7 +23,7 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
   let zTemp: number[] = [];
   generatedPoints.forEach((collection, collectionIndex) => {
     collection.forEach((point, pointIndex) => {
-      const diagramPoint = (({ color, alpha, r, ...o }) => o)(point);
+      const diagramPoint = (({ color, r, ...o }) => o)(point);
       Object.entries(diagramPoint).map((attribute, attributeIndex) => {
         const key = attribute[0];
         const value = attribute[1];
@@ -49,11 +48,24 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
     });
   });
   data.id.forEach((id) => {
+    // if(data.y.some((y, index)=>y===data.y[id])){
+    //   data.y.splice(id);
+    //   data.z[in]
+    // }
     let newArr = new Array(data.id.length).fill(0);
+    // if (data.y.some((item) => item === data.y[id])) {
+    //   data.y.forEach((y, index) => {
+    //     if (y === data.y[id]) {
+    //       data.y.splice(id);
+    //       data.z[index][id] = zTemp[id];
+    //     }
+    //   });
+    // } else {
     newArr[id] = zTemp[id];
     data.z.push(newArr);
+    //   }
   });
-  console.log(data);
+  // console.log(data);
   const tabs = ['3D Surface Plot', 'Contour Diagram', 'Volume'];
 
   // React states
@@ -71,6 +83,18 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
 
   return (
     <div className="right-main-side">
+      {/* <table>
+        <thead>{data.x && data.x.map((x) => <th>{x}</th>)}</thead>
+        <tbody>
+          {data.y &&
+            data.y.map((y, index) => {
+              <tr>
+                <td style={{ color: 'red' }}>{y}</td>
+                {data.z && data.z[index].map((z) => <td>{z}</td>)}
+              </tr>;
+            })}
+        </tbody>
+      </table> */}
       <Tab
         tabs={tabs}
         selectedIndex={selectedIndex}

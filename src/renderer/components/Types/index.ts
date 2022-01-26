@@ -5,7 +5,6 @@ export interface Point {
   r: number;
   z: number;
   color?: string;
-  alpha?: number;
 }
 export interface data {
   id: number[];

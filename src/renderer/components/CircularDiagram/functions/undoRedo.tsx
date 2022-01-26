@@ -40,14 +40,7 @@ export const redo = (
   redoStack[redoStack.length - 1]?.forEach((item) => {
     const xBound = getBoundX(radius, item.x);
     const yBound = getBoundY(radius, item.y);
-    return drawPoint(
-      item.point,
-      xBound,
-      yBound,
-      'point',
-      item.color,
-      item.alpha
-    );
+    return drawPoint(item.point, xBound, yBound, 'point', item.color);
   });
   if (redoStack.length === 0) return;
   setNamePoint((prev) => String.fromCharCode(prev.charCodeAt(0) + 1));

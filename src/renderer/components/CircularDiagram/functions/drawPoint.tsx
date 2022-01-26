@@ -3,8 +3,7 @@ export const drawPoint = (
   x: number,
   y: number,
   indicator: string,
-  color?: string,
-  alpha?: number
+  color?: string
 ) => {
   var svgElement = document.createElementNS(
     'http://www.w3.org/2000/svg',
@@ -24,12 +23,12 @@ export const drawPoint = (
   textElement.setAttribute('fill', color || '#A47A51');
   textElement.setAttribute('font-family', 'Verdana');
   textElement.setAttribute('font-size', '5');
+  textElement.setAttribute('class', 'points-text');
   textElement.appendChild(myText);
   newElement.setAttribute(
     'fill',
     indicator === 'marker' ? 'none' : color || '#A47A51'
   );
-  newElement.setAttribute('fillOpacity', `${alpha || 0}`);
   newElement.setAttribute('stroke', color || '#A47A51');
   newElement.setAttribute('strokeWidth', '1');
   newElement.setAttribute('cx', '2.5');

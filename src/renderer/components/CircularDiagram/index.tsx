@@ -19,6 +19,7 @@ import {
   modifyNumber,
   modifyPointsOptions,
   modifyColor,
+  modifyBackgroundColor,
 } from './functions/modificationFunctions';
 import {
   getBoundX,
@@ -60,23 +61,17 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [numberOfPoints, setNumberOfPoints] = useState(1);
   const [pointsOption, setPointsOptions] = useState(false); // false -> linear, true -> radial
   const [renderInput, setRenderInput] = useState(false);
-  const [color, setColor] = useState('#A47A51');
-  const [alpha, setAlpha] = useState(100);
   const [undoStack, setUndoStack] = useState<Point[][]>([]);
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
+  const [color, setColor] = useState('#A47A51');
+  const [backgroudColor, setBackgroudColor] = useState('#c6b098');
+  const [hideText, setHideText] = useState(false);
   useEffect(() => {
     generatedPoints.forEach((collection) =>
       collection.forEach((item) => {
         const xBound = getBoundX(radius, item.x);
         const yBound = getBoundY(radius, item.y);
-        return drawPoint(
-          item.point,
-          xBound,
-          yBound,
-          'point',
-          item.color,
-          item.alpha
-        );
+        return drawPoint(item.point, xBound, yBound, 'point', item.color);
       })
     );
   }, []);
@@ -85,7 +80,10 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
     <div className="circular-diagram">
       <div className="circle-wrapper" id="circle-wrapper">
         <svg
-          className={`circle ${marker ? 'marker' : 'no-marker'}`}
+          className={`circle ${marker ? 'marker' : 'no-marker'}${
+            hideText ? ' hide-text' : ''
+          }`}
+          style={{ backgroundColor: backgroudColor }}
           id="circle"
           onMouseMove={(e) =>
             hoverCoordinates(e, radius, setXVal, setYVal, setRVal)
@@ -123,6 +121,24 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               type="number"
               value={radius}
               onChange={(e: any) => setRadius(parseInt(e.target.value))}
+            />
+          </label>
+          <label className="circle-background">
+            Circle Color:
+            <ColorPicker
+              color={backgroudColor}
+              enableAlpha={false}
+              onChange={(e: any) => modifyBackgroundColor(e, setBackgroudColor)}
+              // onClose={closeHandler}
+              placement="topLeft"
+              className="color-picker"
+            />
+          </label>
+          <label className="circle-hide">
+            Hide Text:
+            <input
+              type="checkbox"
+              onChange={(e) => setHideText(e.target.checked)}
             />
           </label>
         </div>
@@ -251,8 +267,8 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           </div>
           <ColorPicker
             color={color}
-            alpha={alpha}
-            onChange={(e: any) => modifyColor(e, setColor, setAlpha)}
+            enableAlpha={false}
+            onChange={(e: any) => modifyColor(e, setColor)}
             // onClose={closeHandler}
             placement="topLeft"
             className="color-picker"
@@ -277,7 +293,6 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               numberOfPoints,
               pointsOption,
               color,
-              alpha,
               setUndoStack,
               setRedoStack
             )

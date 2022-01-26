@@ -34,7 +34,6 @@ export const generatePoints = (
   numberOfPoints: number,
   pointsOption: boolean,
   color: string,
-  alpha: number,
   setUndoStack: React.Dispatch<React.SetStateAction<Point[][]>>,
   setRedoStack: React.Dispatch<React.SetStateAction<Point[][]>>
 ) => {
@@ -48,7 +47,7 @@ export const generatePoints = (
   } else if (numberOfPoints == 1) {
     const xBound = getBoundX(radius, xPoint);
     const yBound = getBoundY(radius, yPoint);
-    drawPoint(namePoint + '0', xBound, yBound, 'point', color, alpha);
+    drawPoint(namePoint + '0', xBound, yBound, 'point', color);
     pointsArray.push({
       point: namePoint + '0',
       x: xPoint,
@@ -56,7 +55,6 @@ export const generatePoints = (
       r: rPoint,
       z: zPoint,
       color: color,
-      alpha: alpha,
     });
   } else {
     if (pointsOption) {
@@ -74,11 +72,10 @@ export const generatePoints = (
           r: rPoint,
           z: zPoint,
           color: color,
-          alpha: alpha,
         });
         const xBound = getBoundX(radius, x);
         const yBound = getBoundY(radius, y);
-        drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
+        drawPoint(namePoint + i, xBound, yBound, 'point', color);
       }
     } else {
       const xAround = Math.sqrt(radius ** 2 - yPoint ** 2);
@@ -95,11 +92,10 @@ export const generatePoints = (
           r: r,
           z: zPoint,
           color: color,
-          alpha: alpha,
         });
         const xBound = getBoundX(radius, x);
         const yBound = getBoundY(radius, y);
-        drawPoint(namePoint + i, xBound, yBound, 'point', color, alpha);
+        drawPoint(namePoint + i, xBound, yBound, 'point', color);
       }
     }
   }

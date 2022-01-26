@@ -10,12 +10,17 @@
       height: 260px;
       margin: auto;
       border-radius: 50%;
-      background-color: var(--light-brown-primary);
+      // background-color: var(--light-brown-primary);
       &.marker {
         cursor: crosshair;
       }
       &.no-marker {
         pointer-events: none;
+      }
+      &.hide-text {
+        .points-text {
+          display: none;
+        }
       }
       .center {
         position: absolute;
@@ -26,8 +31,15 @@
     }
     .circle-details {
       width: 100px;
-      .circle-diameter {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      label {
         color: var(--light-brown-primary);
+        display: flex;
+        flex-direction: column;
+      }
+      .circle-diameter {
         input {
           margin-top: 0.25rem;
           width: 75px;
@@ -38,6 +50,54 @@
           border: none;
           &:focus {
             outline: none;
+          }
+        }
+      }
+      .circle-background {
+        .color-picker span {
+          width: 75px;
+        }
+      }
+      .circle-hide {
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: center;
+
+        input[type='checkbox'] {
+          /* Add if not using autoprefixer */
+          -webkit-appearance: none;
+          appearance: none;
+          /* For iOS < 15 to remove gradient background */
+          background-color: var(--v-light-blue-secondary);
+          /* Not removed via appearance */
+          margin: 0;
+
+          width: 1.15em;
+          height: 1.15em;
+          border: 0.15em solid var(--light-brown-primary);
+          border-radius: 0.15em;
+          transform: translateY(-0.075em);
+          display: grid;
+          place-content: center;
+          &::before {
+            content: '';
+            width: 0.65em;
+            height: 0.65em;
+            transform-origin: bottom left;
+            clip-path: polygon(
+              14% 44%,
+              0 65%,
+              50% 100%,
+              100% 16%,
+              80% 0%,
+              43% 62%
+            );
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em var(--dark-brown-primary);
+          }
+          &:checked::before {
+            transform: scale(1);
           }
         }
       }
