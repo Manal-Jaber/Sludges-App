@@ -1,38 +1,66 @@
 .circular-diagram {
   margin-top: 1.5rem;
-  .circle-wrapper {
+  .circle-part {
     width: 100%;
     display: flex;
     flex-direction: row;
-    .circle {
+    justify-content: space-between;
+    .circle-wrapper {
       position: relative;
-      width: 260px;
-      height: 260px;
-      margin: auto;
-      border-radius: 50%;
-      // background-color: var(--light-brown-primary);
-      &.marker {
-        cursor: crosshair;
+      border: solid 1px var(--light-brown-primary);
+      padding: 1rem;
+      background-color: rgba($color: #a47a51, $alpha: 0.2);
+      &.text-marker {
+        cursor: text;
       }
-      &.no-marker {
+      &.no-text-marker {
         pointer-events: none;
       }
-      &.hide-text {
-        .points-text {
-          display: none;
+      .text-label {
+        pointer-events: all;
+        position: absolute;
+        width: 100px;
+        color: var(--dark-brown-primary);
+        background-color: var(--v-light-blue-secondary);
+        border-color: var(--light-brown-primary);
+        border-radius: 3px;
+        &:focus-visible {
+          outline: var(--light-brown-primary) auto 1px !important;
         }
       }
-      .center {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
+      .circle {
+        position: relative;
+        width: 260px;
+        height: 260px;
+        margin: auto;
+        border-radius: 50%;
+        &.marker {
+          pointer-events: all;
+          cursor: crosshair !important;
+        }
+        &.no-marker {
+          pointer-events: none !important;
+          cursor: none !important;
+        }
+
+        &.hide-text {
+          .points-text {
+            display: none;
+          }
+        }
+        .center {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
     .circle-details {
       width: 100px;
       display: flex;
       flex-direction: column;
+      align-items: flex-end;
       gap: 1rem;
       label {
         color: var(--light-brown-primary);
@@ -185,7 +213,7 @@
           display: inline-block;
           color: var(--dark-brown-primary);
           background-color: var(--v-light-blue-secondary);
-          padding: 0.5rem 1rem;
+          padding: 0.5rem 0 0.5rem 1rem;
           border: none;
           &:focus {
             outline: none;

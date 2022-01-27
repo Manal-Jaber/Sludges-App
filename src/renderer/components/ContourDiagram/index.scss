@@ -10,8 +10,10 @@
       border: none;
       padding: 1rem;
       background-color: var(--v-light-blue-secondary);
+      text-align: center;
       &::placeholder {
         color: var(--dark-brown-primary);
+        opacity: 0.4;
       }
       &:focus {
         outline: none;

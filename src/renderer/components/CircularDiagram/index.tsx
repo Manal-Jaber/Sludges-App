@@ -28,6 +28,7 @@ import {
 import { undo, redo } from './functions/undoRedo';
 import { Point } from 'renderer/components/Types/index';
 import { drawPoint } from './functions/drawPoint';
+import { insertLabel } from './functions/insertLabel';
 
 // Constants
 export const width =
@@ -64,8 +65,11 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [undoStack, setUndoStack] = useState<Point[][]>([]);
   const [redoStack, setRedoStack] = useState<Point[][]>([]);
   const [color, setColor] = useState('#A47A51');
-  const [backgroudColor, setBackgroudColor] = useState('#c6b098');
+  const [backgroundColor, setBackgroundColor] = useState('#c6b098');
   const [hideText, setHideText] = useState(false);
+  const [textMarker, setTextMarker] = useState(false);
+  const [xLabel, setXLabel] = useState(0);
+  const [yLabel, setYLabel] = useState(0);
   useEffect(() => {
     generatedPoints.forEach((collection) =>
       collection.forEach((item) => {
@@ -78,42 +82,50 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
 
   return (
     <div className="circular-diagram">
-      <div className="circle-wrapper" id="circle-wrapper">
-        <svg
-          className={`circle ${marker ? 'marker' : 'no-marker'}${
-            hideText ? ' hide-text' : ''
+      <div className="circle-part">
+        <div
+          className={`circle-wrapper ${
+            textMarker ? 'text-marker' : 'no-text-marker'
           }`}
-          style={{ backgroundColor: backgroudColor }}
-          id="circle"
-          onMouseMove={(e) =>
-            hoverCoordinates(e, radius, setXVal, setYVal, setRVal)
-          }
-          onClick={(e: any) =>
-            assignCoordinates(
-              e,
-              radius,
-              namePoint,
-              setRenderInput,
-              setMarker,
-              setXPoint,
-              setYPoint,
-              setRPoint
-            )
-          }
+          id="circle-wrapper"
+          onClick={(e) => textMarker && insertLabel(e, setTextMarker)}
         >
           <svg
-            className="center"
-            width="5"
-            height="5"
-            x="50%"
-            y="50%"
-            viewBox="0 0 5 5"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            className={`circle ${marker ? 'marker' : 'no-marker'}${
+              hideText ? ' hide-text' : ''
+            }`}
+            style={{ backgroundColor: backgroundColor }}
+            id="circle"
+            onMouseMove={(e) =>
+              hoverCoordinates(e, radius, setXVal, setYVal, setRVal)
+            }
+            onClick={(e: any) =>
+              assignCoordinates(
+                e,
+                radius,
+                namePoint,
+                setRenderInput,
+                setMarker,
+                setXPoint,
+                setYPoint,
+                setRPoint
+              )
+            }
           >
-            <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
+            <svg
+              className="center"
+              width="5"
+              height="5"
+              x="50%"
+              y="50%"
+              viewBox="0 0 5 5"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <circle cx="2.5" cy="2.5" r="2.5" fill="#A47A51" />
+            </svg>
           </svg>
-        </svg>
+        </div>
         <div className="circle-details">
           <label className="circle-diameter">
             Radius (m):
@@ -126,9 +138,11 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
           <label className="circle-background">
             Circle Color:
             <ColorPicker
-              color={backgroudColor}
+              color={backgroundColor}
               enableAlpha={false}
-              onChange={(e: any) => modifyBackgroundColor(e, setBackgroudColor)}
+              onChange={(e: any) =>
+                modifyBackgroundColor(e, setBackgroundColor)
+              }
               // onClose={closeHandler}
               placement="topLeft"
               className="color-picker"
@@ -141,6 +155,11 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               onChange={(e) => setHideText(e.target.checked)}
             />
           </label>
+          <Button
+            text="Insert Label"
+            className="insert-label-btn"
+            listener={() => setTextMarker(true)}
+          />
         </div>
       </div>
       <div className="first-row">
