@@ -1,4 +1,3 @@
-import deleteImage from 'renderer/assets/delete-icon.svg';
 export const insertLabel = (
   e: any,
   LabelId: number,
@@ -13,11 +12,17 @@ export const insertLabel = (
   label.className = 'text-label';
   label.value = '';
 
-  const deleteIcon = document.createElement('img') as HTMLImageElement;
-  deleteIcon.src = deleteImage;
-  deleteIcon.addEventListener('click', () =>
-    removeLabel(`label-container${LabelId}`)
-  );
+  const deleteIcon = document.createElement('button') as HTMLButtonElement;
+  deleteIcon.innerText = 'x';
+  // deleteIcon.style.padding = '1rem';
+  deleteIcon.style.position = 'relative';
+  deleteIcon.style.cursor = 'pointer';
+  deleteIcon.style.width = '16px';
+  deleteIcon.style.height = '16px';
+  deleteIcon.style.pointerEvents = 'all';
+  deleteIcon.addEventListener('click', () => {
+    removeLabel(`label-container${LabelId}`);
+  });
 
   const labelContainer = document.createElement('div');
   labelContainer.id = `label-container${LabelId}`;
@@ -31,5 +36,5 @@ export const insertLabel = (
 };
 
 export const removeLabel = (id: string) => {
-  document.querySelector(id)?.remove();
+  document.getElementById(id)?.remove();
 };
