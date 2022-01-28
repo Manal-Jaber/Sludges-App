@@ -68,6 +68,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [backgroundColor, setBackgroundColor] = useState('#c6b098');
   const [hideText, setHideText] = useState(false);
   const [textMarker, setTextMarker] = useState(false);
+  const [labelId, setLabelId] = useState(0);
   const [xLabel, setXLabel] = useState(0);
   const [yLabel, setYLabel] = useState(0);
   useEffect(() => {
@@ -88,7 +89,9 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
             textMarker ? 'text-marker' : 'no-text-marker'
           }`}
           id="circle-wrapper"
-          onClick={(e) => textMarker && insertLabel(e, setTextMarker)}
+          onClick={(e) =>
+            textMarker && insertLabel(e, labelId, setLabelId, setTextMarker)
+          }
         >
           <svg
             className={`circle ${marker ? 'marker' : 'no-marker'}${

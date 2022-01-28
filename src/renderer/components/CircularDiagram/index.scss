@@ -16,16 +16,20 @@
       &.no-text-marker {
         pointer-events: none;
       }
-      .text-label {
-        pointer-events: all;
+      .label-container {
         position: absolute;
-        width: 100px;
-        color: var(--dark-brown-primary);
-        background-color: var(--v-light-blue-secondary);
-        border-color: var(--light-brown-primary);
-        border-radius: 3px;
-        &:focus-visible {
-          outline: var(--light-brown-primary) auto 1px !important;
+        display: flex;
+        flex-direction: row;
+        .text-label {
+          pointer-events: all;
+          width: 100px;
+          color: var(--dark-brown-primary);
+          background-color: var(--v-light-blue-secondary);
+          border-color: var(--light-brown-primary);
+          border-radius: 3px;
+          &:focus-visible {
+            outline: var(--light-brown-primary) auto 1px !important;
+          }
         }
       }
       .circle {
