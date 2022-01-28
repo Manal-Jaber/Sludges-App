@@ -12,6 +12,10 @@
       background-color: rgba($color: #a47a51, $alpha: 0.2);
       &.text-marker {
         cursor: text;
+        .circle {
+          pointer-events: none;
+          cursor: text !important;
+        }
       }
       &.no-text-marker {
         pointer-events: none;
@@ -40,7 +44,7 @@
         border-radius: 50%;
         &.marker {
           pointer-events: all;
-          cursor: crosshair !important;
+          cursor: crosshair;
         }
         &.no-marker {
           pointer-events: none !important;
