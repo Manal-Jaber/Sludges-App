@@ -19,7 +19,14 @@ export const insertLabel = (
   deleteIcon.style.cursor = 'pointer';
   deleteIcon.style.width = '16px';
   deleteIcon.style.height = '16px';
+  deleteIcon.style.padding = '0.5rem';
+  deleteIcon.style.display = 'flex';
+  deleteIcon.style.justifyContent = 'center';
+  deleteIcon.style.alignItems = 'center';
   deleteIcon.style.pointerEvents = 'all';
+  deleteIcon.style.border = 'none';
+  deleteIcon.style.background = 'var(--dark-brown-primary)';
+  deleteIcon.style.color = 'var(--light-brown-primary)';
   deleteIcon.addEventListener('click', () => {
     removeLabel(`label-container${LabelId}`);
   });
