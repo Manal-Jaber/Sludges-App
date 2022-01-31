@@ -103,6 +103,7 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               hoverCoordinates(e, radius, setXVal, setYVal, setRVal)
             }
             onClick={(e: any) =>
+              !textMarker &&
               assignCoordinates(
                 e,
                 radius,
