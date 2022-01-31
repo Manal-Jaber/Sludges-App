@@ -55,7 +55,7 @@ const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
                   return (
                     <tr key={pointIndex}>
                       {Object.entries(point)
-                        .slice(0, -3)
+                        .slice(0, -2)
                         .map((attribute, key) => {
                           const value = attribute[1];
                           const roundedValue =
