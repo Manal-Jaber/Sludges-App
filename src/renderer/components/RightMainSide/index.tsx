@@ -47,25 +47,29 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
       data.id.push(i++);
     });
   });
+
+  console.log('data', data);
   data.id.forEach((id) => {
-    // if(data.y.some((y, index)=>y===data.y[id])){
-    //   data.y.splice(id);
-    //   data.z[in]
-    // }
     let newArr = new Array(data.id.length).fill(0);
-    // if (data.y.some((item) => item === data.y[id])) {
-    //   data.y.forEach((y, index) => {
-    //     if (y === data.y[id]) {
-    //       data.y.splice(id);
-    //       data.z[index][id] = zTemp[id];
-    //     }
-    //   });
-    // } else {
+    let newY = data.y.slice(id + 1);
     newArr[id] = zTemp[id];
     data.z.push(newArr);
-    //   }
+    if (newY.some((item, itemId) => item === data.y[id])) {
+      newY.forEach((y, index) => {
+        if (y === data.y[id]) {
+          data.y.splice(id, 1);
+          console.log(id);
+          // data.z[index + id][id] = zTemp[id];
+          console.log('data.y', data.y, 'index', index, 'data.z', data.z);
+        }
+      });
+      // }
+      // else {
+      //   newArr[id] = zTemp[id];
+      //   data.z.push(newArr);
+    }
   });
-  // console.log(data);
+  console.log(data);
   const tabs = ['3D Surface Plot', 'Contour Diagram', 'Volume'];
 
   // React states
