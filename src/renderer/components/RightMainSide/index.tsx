@@ -7,69 +7,11 @@ import { Point, data } from 'renderer/components/Types/index';
 import './index.scss';
 
 interface RightMainSide {
-  generatedPoints: Point[][];
+  data: data;
 }
 
-const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
-  // Points sent to diagrams
-  const data: data = {
-    id: [],
-    name: [],
-    x: [],
-    y: [],
-    z: [],
-  };
-  let i = 0;
-  let zTemp: number[] = [];
-  generatedPoints.forEach((collection, collectionIndex) => {
-    collection.forEach((point, pointIndex) => {
-      const diagramPoint = (({ color, r, ...o }) => o)(point);
-      Object.entries(diagramPoint).map((attribute, attributeIndex) => {
-        const key = attribute[0];
-        const value = attribute[1];
-        switch (key) {
-          case 'point':
-            data.name.push(value);
-            break;
-          case 'x':
-            data.x.push(value);
-            break;
-          case 'y':
-            data.y.push(value);
-            break;
-          case 'z':
-            zTemp.push(value);
-            break;
-          default:
-            break;
-        }
-      });
-      data.id.push(i++);
-    });
-  });
-
-  console.log('data', data);
-  data.id.forEach((id) => {
-    let newArr = new Array(data.id.length).fill(0);
-    let newY = data.y.slice(id + 1);
-    newArr[id] = zTemp[id];
-    data.z.push(newArr);
-    if (newY.some((item, itemId) => item === data.y[id])) {
-      newY.forEach((y, index) => {
-        if (y === data.y[id]) {
-          data.y.splice(id, 1);
-          console.log(id);
-          // data.z[index + id][id] = zTemp[id];
-          console.log('data.y', data.y, 'index', index, 'data.z', data.z);
-        }
-      });
-      // }
-      // else {
-      //   newArr[id] = zTemp[id];
-      //   data.z.push(newArr);
-    }
-  });
-  console.log(data);
+const RightMainSide: React.FC<RightMainSide> = ({ data }) => {
+  let zTemp = data.zData.map(({ zValue }) => zValue);
   const tabs = ['3D Surface Plot', 'Contour Diagram', 'Volume'];
 
   // React states
@@ -87,18 +29,6 @@ const RightMainSide: React.FC<RightMainSide> = ({ generatedPoints }) => {
 
   return (
     <div className="right-main-side">
-      {/* <table>
-        <thead>{data.x && data.x.map((x) => <th>{x}</th>)}</thead>
-        <tbody>
-          {data.y &&
-            data.y.map((y, index) => {
-              <tr>
-                <td style={{ color: 'red' }}>{y}</td>
-                {data.z && data.z[index].map((z) => <td>{z}</td>)}
-              </tr>;
-            })}
-        </tbody>
-      </table> */}
       <Tab
         tabs={tabs}
         selectedIndex={selectedIndex}

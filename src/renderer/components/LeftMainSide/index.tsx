@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import CircularDiagram from '../CircularDiagram';
 import Tab from '../Tab';
 import Table from '../Table';
-import { Point } from '../Types';
+import { data, Point } from '../Types';
 import './index.scss';
 
 interface LeftMainSide {
@@ -10,6 +10,8 @@ interface LeftMainSide {
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
   namePoint: string;
   setNamePoint: React.Dispatch<React.SetStateAction<string>>;
+  data: data;
+  setData: React.Dispatch<React.SetStateAction<data>>;
 }
 
 const LeftMainSide: React.FC<LeftMainSide> = ({
@@ -17,6 +19,8 @@ const LeftMainSide: React.FC<LeftMainSide> = ({
   setGeneratedPoints,
   namePoint,
   setNamePoint,
+  data,
+  setData,
 }) => {
   const tabs = ['Circular Diagram', 'Table'];
 
@@ -31,6 +35,8 @@ const LeftMainSide: React.FC<LeftMainSide> = ({
           setGeneratedPoints={setGeneratedPoints}
           namePoint={namePoint}
           setNamePoint={setNamePoint}
+          data={data}
+          setData={setData}
         />
       );
     } else {
@@ -38,6 +44,7 @@ const LeftMainSide: React.FC<LeftMainSide> = ({
         <Table
           generatedPoints={generatedPoints}
           setGeneratedPoints={setGeneratedPoints}
+          setData={setData}
         />
       );
     }

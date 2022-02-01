@@ -26,7 +26,7 @@ import {
   getBoundY,
 } from 'renderer/components/CircularDiagram/functions/bound-relative-coordinates';
 import { undo, redo } from './functions/undoRedo';
-import { Point } from 'renderer/components/Types/index';
+import { data, Point } from 'renderer/components/Types/index';
 import { drawPoint } from './functions/drawPoint';
 import { insertLabel } from './functions/insertLabel';
 
@@ -41,12 +41,16 @@ interface CircularDiagram {
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
   namePoint: string;
   setNamePoint: React.Dispatch<React.SetStateAction<string>>;
+  data: data;
+  setData: React.Dispatch<React.SetStateAction<data>>;
 }
 const CircularDiagram: React.FC<CircularDiagram> = ({
   generatedPoints,
   setGeneratedPoints,
   namePoint,
   setNamePoint,
+  data,
+  setData,
 }) => {
   // React states
   const [radius, setRadius] = useState(100);
@@ -69,8 +73,6 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
   const [hideText, setHideText] = useState(false);
   const [textMarker, setTextMarker] = useState(false);
   const [labelId, setLabelId] = useState(0);
-  const [xLabel, setXLabel] = useState(0);
-  const [yLabel, setYLabel] = useState(0);
   useEffect(() => {
     generatedPoints.forEach((collection) =>
       collection.forEach((item) => {
@@ -317,7 +319,9 @@ const CircularDiagram: React.FC<CircularDiagram> = ({
               pointsOption,
               color,
               setUndoStack,
-              setRedoStack
+              setRedoStack,
+              data,
+              setData
             )
           }
         />

@@ -3,7 +3,7 @@ import Button from '../Button';
 import XLSX from 'xlsx';
 
 import './index.scss';
-import { Point } from 'renderer/components/Types/index';
+import { Point, data } from 'renderer/components/Types/index';
 
 // importing functions
 import { zTableModify } from 'renderer/components/Table/functions/zTableModify';
@@ -11,9 +11,14 @@ import { zTableModify } from 'renderer/components/Table/functions/zTableModify';
 interface Table {
   generatedPoints: Point[][];
   setGeneratedPoints: React.Dispatch<React.SetStateAction<Point[][]>>;
+  setData: React.Dispatch<React.SetStateAction<data>>;
 }
 
-const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
+const Table: React.FC<Table> = ({
+  generatedPoints,
+  setGeneratedPoints,
+  setData,
+}) => {
   // Listeners
   const exportTable = () => {
     // here we should apply the data stored in the state holding the array of generated points
@@ -36,6 +41,7 @@ const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
     XLSX.writeFile(workbook, 'points_sheet.xlsx');
   };
 
+  let pointId = 0;
   return (
     <div className="table-container">
       <table className="table">
@@ -52,10 +58,11 @@ const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
             return (
               <>
                 {collection.map((point, pointIndex) => {
+                  ++pointId;
                   return (
                     <tr key={pointIndex}>
                       {Object.entries(point)
-                        .slice(0, -2)
+                        .slice(1, -2)
                         .map((attribute, key) => {
                           const value = attribute[1];
                           const roundedValue =
@@ -82,7 +89,10 @@ const Table: React.FC<Table> = ({ generatedPoints, setGeneratedPoints }) => {
                               e,
                               collectionIndex,
                               pointIndex,
-                              setGeneratedPoints
+                              // pointId,
+                              generatedPoints,
+                              setGeneratedPoints,
+                              setData
                             )
                           }
                         />
