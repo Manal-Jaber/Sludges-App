@@ -1,3 +1,5 @@
+Windows Desktop App that uses Electron with ReactJs, Sass along with Plotly library in order to build some visualizations for sludges in a tank
+
 <img src=".erb/img/erb-banner.svg" width="100%" />
 
 <br>
